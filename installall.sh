@@ -157,6 +157,9 @@ echo "Downloading and Preparing files"
 cd /home/"$DOMAINUSER"/public_html/
 wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/bmlt-root-server.zip
 unzip ./bmlt-root-server.zip
+wget -cO - wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
+ >  /home/"$DOMAINUSER"/public_html/.htaccess
+
 chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
 
