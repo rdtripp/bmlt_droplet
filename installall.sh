@@ -123,7 +123,7 @@ sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' 
 read -p "Please enter your twilio account sid:   "  TWILACCTSID
 sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-read -p "Please enter your twilio Authorization Token:   " TWILAUTHTOK
+read -p "Please enter your twilio Auth Token:   " TWILAUTHTOK
 sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
 read -p "Please BMLT root server user name:   "  BMLTUSR
