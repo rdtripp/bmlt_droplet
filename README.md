@@ -59,5 +59,5 @@ Before you can use yap you must:
  
   Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
 
-I wrote this to accomidate a service body such as a region needing to set up a Website, a full BMLT stack, and a website for each areas in a subdirectory format WordPress multisite install.  Other service bodies can use whatever portion they need and delete the rest (after playing with it of course).  Let me know if you use this and any thoughts on how it could be improved.
+I wrote this to accomidate a service body such as a region needing to set up a Website, a full BMLT stack, and a website for each of its areas in a subdirectory format WordPress multisite install.  Other service bodies can use whatever portion they need and delete the rest (after playing with it of course).  Let me know if you use this and any thoughts on how it could be improved.
 
