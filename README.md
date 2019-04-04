@@ -15,30 +15,29 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 
 9. Be prepared to answer the questions it asks:
 
- FQDN:  <yourdomain.org for ex>
+ Enter FQDN for Virtual Server:  <yourdomain.org for ex>
 
- virtual server password: <the password you want for the virtual server>
+ Enter Password for Virtual Server: <the password you want for the virtual server>
  
- wordpress admin user:  <the admin user you want for wordpress>
+ Enter Admin User for WordPress:  <the admin user you want for wordpress>
  
- wordpress admin password:  <the admin password you want for wordpress>
+ Enter WordPress Admin User Password:  <the admin password you want for wordpress>
  
- wordpress default site name: <Greater Umagooma Region of NA for ex>
+ Enter WordPress Default Site Name: <Greater Umagooma Region of NA for ex>
 
- title (Phone Greeting):  <Thanks for calling the ........we're glad you're here for ex>
+ Please Enter Phone Greeting:  <Thanks for calling the ........we're glad you're here for ex>
 
- bmlt_root_server: <the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ .  If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ .
+ Please enter your BMLT root server: <the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ .  If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ .
 
- google_maps_api_key: <your Google Maps API Key>
+ Please enter your Google Maps API key: <your Google Maps API Key>
 
- twilio_account_sid: <your twilio account SID>
+ Please enter your twilio account sid: <your twilio account SID>
 
- twilio_auth_token: <your twilio account Authorization Token>
+ Please enter your twilio Authorization Token: <your twilio account Authorization Token>
 
- bmlt_username:  <username used when logging into your BMLT root server>
+ Please BMLT root server user name:  <username used when logging into your BMLT root server>
 
- bmlt_password:  <password used when logging into your BMLT root server>
-
+ Please enter your BMLT root server password:<password used when logging into your BMLT root server>
 
 10.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
 
