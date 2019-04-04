@@ -161,5 +161,9 @@ chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
 
 echo "Setup completed successfully!!"
+echo "make note of the following info to set up the BMLT root server"
+echo "BMLT database: $BMLTDB"
+echo "BMLT database user: $DOMAINUSER"
+echo "BMLT database password: $PASSWD" 
 #Reboot system
 #reboot
