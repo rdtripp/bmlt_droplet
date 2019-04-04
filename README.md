@@ -6,7 +6,7 @@ The nickel tour:
 
 1.  Create a Ubuntu 18.04.2 Droplet (the cheapest $5.00/mo one) named (for example) vhost.yourdomain.org
 2.  You will get a temp  password and the ip address emailed to you.   
-3.  Point vhost.yourdomain.org (for example) and yourdomain.org, mail.yourdomain.org (optional) www.yourdomain.org (You can use something.yourdomain.org www. ...... etc instead of yourdomain.org so it doesn't take an site off line)
+3.  Point vhost.yourdomain.org (for example) and yourdomain.org, mail.yourdomain.org (optional) www.yourdomain.org (You can use something.yourdomain.org www. ...... etc instead of yourdomain.org so it doesn't take a site off line)
 4.  When dns updates ssh root@vhost.yourdomain.org and change the password
 5.  power off the server using:
          halt --poweroff
@@ -49,5 +49,5 @@ Before you can use yap:
 2.  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
 3.  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
 
-I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The multisite feature is handy for generating different variations of meeting lists or lists for different service bodies event if you ndon't need it for other service bodies websites.
+I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The WordPress multisite feature is handy for generating different variations of meeting lists or lists for different service bodies event if you don't need it for other service bodies websites.
 
