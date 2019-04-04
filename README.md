@@ -40,14 +40,14 @@ bmlt_password = The database info will be generated for you
 2. yap admin at :  https://yourdomain.org/yap/admin
 
 3. Wordpress multisite admin login (using credentials you entered ):
-https://yourdomain.org/wordpress/wp-admin
+https://yourdomain.org/wordpress/wp-admin  (wordpress-satellite-plugin, bmlt-tabbed-map, bread, and crouton are preinstalled)
 
-4.  BMLT root server install wizard at:  https://yourdomain.org/main_server/
+4.  BMLT root server install wizard at:  https://yourdomain.org/main_server/  #Note: If setting up a root server make sure to copy the database info displayed at the completion of the install script.
 
 Before you can use yap:
 1. initialize the database by going to https://yourdomain.org/yap/update-advisor.php.  It should tell you that you are "ready to yap"
 2.  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
 3.  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
 
-I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The multisite feature is handy for generating different variations of meeting lists or lists for different service bodies
+I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The multisite feature is handy for generating different variations of meeting lists or lists for different service bodies event if you ndon't need it for other service bodies websites.
 
