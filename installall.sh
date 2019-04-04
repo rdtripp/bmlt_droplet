@@ -33,6 +33,9 @@ echo "Starting Virtualmin Installation"
 #Downloads Virtualmin install script
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
+#Select the version of virtualmin you want to install.  Make sure only the version you want to install is uncommented.
+#Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
+
 #Installs full Virtualmin
 #sh ./install.sh -f -v
 
@@ -106,9 +109,13 @@ echo "Downloading YAP & Preparing files"
 #Get YAP
 mkdir /home/"$DOMAINUSER"/public_html/yap
 cd /home/"$DOMAINUSER"/public_html/yap
+
+#Edit the url on the following line to reflect the latest stable version of yap
 wget https://github.com/bmlt-enabled/yap/releases/download/3.0.2/yap-3.0.2.zip
+
 unzip *.zip
 chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
+
 echo "Configuring YAP"
 #Configure yap
 read -p "Please Enter Phone Greeting:   "  TITLE
