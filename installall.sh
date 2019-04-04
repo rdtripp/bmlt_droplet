@@ -63,7 +63,7 @@ echo "Installing WordPress"
 virtualmin install-script --domain $DOMAIN --type wordpress --version latest --path / --db mysql $WPDB
 
 echo "Configuring WordPress"
-#Confiure mysql database access in wp-config.php
+#Configure mysql database access in wp-config.php
 
 #/** The name of the database for WordPress */
 sed -i -- 's/database_name_here/'"$WPDB"'/g' /home/"$DOMAINUSER"/public_html/wp-config.php
