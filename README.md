@@ -17,37 +17,37 @@ The nickel tour:
 wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh; sh ./installall.sh
 
 9. Answer the questions it asks. --  
-FQDN:  yourdomain.org (for example)
-virtual server password: 
-wordpress admin user:
-wordpress admin password:
-wordpress default site name:
+ FQDN:  yourdomain.org (for example)
+ virtual server password: 
+ wordpress admin user:
+ wordpress admin password:
+ wordpress default site name:
 
 In the yap portion of the install answer the questions.
 
-title (Greeting)= 
-bmlt_root_server = 
-google_maps_api_key =
-twilio_account_sid = 
-twilio_auth_token = 
-bmlt_username = 
-bmlt_password = The database info will be generated for you
+title (Phone Greeting):
+bmlt_root_server:
+google_maps_api_key:
+twilio_account_sid:
+twilio_auth_token:
+bmlt_username:
+bmlt_password:
 
 10.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
 
-1.Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
+ 1.Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
 
-2. yap admin at :  https://yourdomain.org/yap/admin
+ 2. yap admin at :  https://yourdomain.org/yap/admin
 
-3. Wordpress multisite admin login (using credentials you entered ):
+ 3. Wordpress multisite admin login (using credentials you entered ):
 https://yourdomain.org/wordpress/wp-admin  (wordpress-satellite-plugin, bmlt-tabbed-map, bread, and crouton are preinstalled)
 
-4.  BMLT root server install wizard at:  https://yourdomain.org/main_server/  #Note: If setting up a root server make sure to copy the database info displayed at the completion of the install script.
+ 4.  BMLT root server install wizard at:  https://yourdomain.org/main_server/  #Note: If setting up a root server make sure to copy the setup info displayed at the completion of the install script.
 
 Before you can use yap:
-1. initialize the database by going to https://yourdomain.org/yap/update-advisor.php.  It should tell you that you are "ready to yap"
-2.  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
-3.  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
+ 1. initialize the database by going to https://yourdomain.org/yap/update-advisor.php.  It should tell you that you are "ready to yap"
+ 2.  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
+ 3.  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
 
-I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The WordPress multisite feature is handy for generating different variations of meeting lists or lists for different service bodies event if you don't need it for other service bodies websites.
+I wrote this for a Region needing to set up a Website, a full BMLT stack, and a site for each area in a subdirectory.  You could delete the BMLT root server if you don't need it (after playing with it of course) or not.  The WordPress multisite feature is handy for generating different variations of meeting lists or lists for different service bodies even if you don't need it for other service bodies websites.
 
