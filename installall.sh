@@ -79,10 +79,10 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 #End Wordpress CLI install
-echo "Configuring WordPress as multisite"
-Configure WordPress multisite
-sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/wordpress/ --url=http://"$DOMAIN"/wordpress/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
-wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/wordpress/.htaccess
+#echo "Configuring WordPress as multisite"
+#Configure WordPress multisite
+#sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/wordpress/ --url=http://"$DOMAIN"/wordpress/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
+#wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/wordpress/.htaccess
 
 echo "Installin WordPress Plugins"
 #install WordPress Plugins
