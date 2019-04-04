@@ -8,6 +8,8 @@ Prerequisites:
 
 3. Google maps api key, instructions at https://bmlt.app/google-maps-api-keys-and-geolocation-issues/
 
+4.  A domain that you can create dns A records.  You will need at mimimum a domain for the droplet such as vhost.yourdomain.com and a domain for the virtual server such as yourdomain.com or something.yourdomain.com.  WWW. for the virtual server is also recommended.  If you do the full virtualmin install mail. for the virtual server is also recommended.
+
 Install Procedure:
 
 1.  Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one,  you can upgrade later as needed) named (for example) vhost.yourdomain.org
