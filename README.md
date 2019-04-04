@@ -31,9 +31,11 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 #Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
 
 #Installs full Virtualmin
+
 #sh ./install.sh -f -v
 
 #Installs Virtualmin Minimum (default)
+
 sh ./install.sh -f -v -m
 
 ...........
