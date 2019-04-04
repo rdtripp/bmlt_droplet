@@ -1,7 +1,5 @@
 # bmlt_ubuntu_virtualmin
 
-I haven't had time to write complete instructions yet and probably won't have time until after RSC in Baton Rouge this weekend.
-
 The nickel tour:
 
 1.  Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one,  you can upgrade later as needed) named (for example) vhost.yourdomain.org
