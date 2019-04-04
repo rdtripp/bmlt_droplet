@@ -16,7 +16,7 @@ The nickel tour:
 
 wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh; sh ./installall.sh
 
-9. Answer the questions it asks:
+9. Be prepared to answer the questions it asks:
 
  FQDN:  yourdomain.org (for example)
 
@@ -28,25 +28,23 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
  
  wordpress default site name:
 
-In the yap portion of the install answer the questions.
+ title (Phone Greeting):
 
-title (Phone Greeting):
+ bmlt_root_server:
 
-bmlt_root_server:
+ google_maps_api_key:
 
-google_maps_api_key:
+ twilio_account_sid:
 
-twilio_account_sid:
+ twilio_auth_token:
 
-twilio_auth_token:
+ bmlt_username:
 
-bmlt_username:
-
-bmlt_password:
+ bmlt_password:
 
 10.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
 
- 1.Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
+  1.Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
 
  2. yap admin at :  https://yourdomain.org/yap/admin
 
