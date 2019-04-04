@@ -21,9 +21,33 @@ Install Procedure:
 7.  Power the server back up and log back in via terminal.
 8.  Paste in the following command and into the terminal and press enter:
 
-wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh; sh ./installall.sh
+wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh
 
-9. Be prepared to answer the questions it asks:
+9.  Open the install script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install and to get the latest versions of yap and BMLT Root Server, save the file, and close the editor.
+
+.............
+#Select the version of virtualmin you want to install.  Make sure only the version you want to install is uncommented.
+#Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
+
+#Installs full Virtualmin
+#sh ./install.sh -f -v
+
+#Installs Virtualmin Minimum (default)
+sh ./install.sh -f -v -m
+...........
+...........
+#Edit the url on the following line to reflect the latest stable version of yap
+wget https://github.com/bmlt-enabled/yap/releases/download/3.0.2/yap-3.0.2.zip
+..........
+
+...........
+#Edit the url on the following line to reflect the latest stable version of BMLT Root Server
+wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/bmlt-root-server.zip
+.............
+
+10.  Type command into terminal: sh ./installall.sh and press enter
+
+11. Be prepared to answer the questions it asks:
 
  Enter FQDN for Virtual Server:  <yourdomain.org for ex>
 
@@ -49,7 +73,7 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 
  Please enter your BMLT root server password:<password used when logging into your BMLT root server>
 
-10.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
+12.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
 
   Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
 
