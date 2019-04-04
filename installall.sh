@@ -87,7 +87,7 @@ wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/mast
 echo "Installin WordPress Plugins"
 #install WordPress Plugins
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bmlt-wordpress-satellite-plugin --activate-network
-sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress plugin install bread --activate-network
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bread --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install crouton --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bmlt-tabbed-map --activate-network
 
