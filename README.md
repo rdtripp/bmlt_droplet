@@ -1,15 +1,23 @@
 # bmlt_ubuntu_virtualmin
 
-The nickel tour:
+Prerequisites:
+
+1. An account with DigitalOcean https://www.digitalocean.com/
+
+2. An account with twilio https://www.twilio.com/ ,  a phone# with them, ACCOUNT SID , & AUTH TOKEN
+
+3. Google maps api key, instructions at https://bmlt.app/google-maps-api-keys-and-geolocation-issues/
+
+Install Procedure:
 
 1.  Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one,  you can upgrade later as needed) named (for example) vhost.yourdomain.org
 2.  You will get a temp  password and the fixed ip address emailed to you.   
 3.  Edit your dns records vhost.yourdomain.org (for example) and yourdomain.org, mail.yourdomain.org (optional) www.yourdomain.org (You can use something.yourdomain.org www.something.yourdomain.org ...... etc instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
-4.  When dns updates log in via terminal: ssh root@vhost.yourdomain.org and change the password
+4.  When dns updates, log in via terminal: ssh root@vhost.yourdomain.org and change the password
 5.  power off the server:  halt --poweroff
 6.  Take a snapshot so you can revert back if you need to without having to redo dns.
 7.  Power the server back up and log back in via terminal.
-8.  paste in the following command and into the terminal and press enter:
+8.  Paste in the following command and into the terminal and press enter:
 
 wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh; sh ./installall.sh
 
@@ -33,7 +41,7 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 
  Please enter your twilio account sid: <your twilio account SID>
 
- Please enter your twilio Authorization Token: <your twilio account Authorization Token>
+ Please enter your twilio Auth Token: <your twilio account Auth Token>
 
  Please BMLT root server user name:  <username used when logging into your BMLT root server>
 
