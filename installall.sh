@@ -142,7 +142,7 @@ sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMA
 
 #edit .htaccess so yap will run under virtualmin
 echo "Editing .htaccess for yap"
-sed -i -- 's/+FollowSymlinks/+SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 
 echo "BMLT Root Server Install"
 #BMLT Root Server Installation
