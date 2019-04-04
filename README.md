@@ -26,6 +26,7 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 9.  Open the install script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install and to get the latest versions of yap and BMLT Root Server, save the file, and close the editor.
 
 .............
+
 #Select the version of virtualmin you want to install.  Make sure only the version you want to install is uncommented.
 #Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
 
@@ -34,17 +35,22 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 
 #Installs Virtualmin Minimum (default)
 sh ./install.sh -f -v -m
+
 ...........
 ...........
+
 #Edit the url on the following line to reflect the latest stable version of yap
 
 wget https://github.com/bmlt-enabled/yap/releases/download/3.0.2/yap-3.0.2.zip
+
 ..........
 
 ...........
+
 #Edit the url on the following line to reflect the latest stable version of BMLT Root Server
 
 wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/bmlt-root-server.zip
+
 .............
 
 10.  Type command into terminal: sh ./installall.sh and press enter
