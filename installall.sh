@@ -66,10 +66,10 @@ echo "Configuring WordPress"
 sed -i -- 's/database_name_here/'"$WPDB"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
 
 # /** MySQL database username */
-sed -i -- 's/username_here/"'"$DOMAINUSER"'"/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
+sed -i -- 's/username_here/'"$DOMAINUSER"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
 
 #/** MySQL database password */
-sed -i -- 's/password_here/"'"$PASSWD"'"/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
+sed -i -- 's/password_here/'"$PASSWD"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
 
 #End WordPress Install
 echo "installing Wordress CLI"
