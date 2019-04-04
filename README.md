@@ -23,7 +23,7 @@ Install Procedure:
 
 wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh
 
-9.  Open the install script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install and to get the latest versions of yap and BMLT Root Server, save the file, and close the editor.
+9.  Open the installall.sh script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install and to get the latest versions of yap and BMLT Root Server, save the file, and close the editor.
 
 .............
 
@@ -69,7 +69,7 @@ wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/b
 
  Please Enter Phone Greeting:  <Thanks for calling the ........we're glad you're here for ex>
 
- Please enter your BMLT root server: <the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ .  If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ .
+ Please enter your BMLT root server: <the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ .  If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ >
 
  Please enter your Google Maps API key: <your Google Maps API Key>
 
