@@ -106,7 +106,7 @@ echo "Downloading YAP & Preparing files"
 #Get YAP
 mkdir /home/"$DOMAINUSER"/public_html/yap
 cd /home/"$DOMAINUSER"/public_html/yap
-wget https://github.com/bmlt-enabled/yap/releases/download/3.0.1/yap-3.0.1.zip
+wget https://github.com/bmlt-enabled/yap/releases/download/3.0.2/yap-3.0.2.zip
 unzip *.zip
 chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
 echo "Configuring YAP"
