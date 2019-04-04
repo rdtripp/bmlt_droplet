@@ -57,19 +57,19 @@ virtualmin create-database --domain $DOMAIN --name $WPDB --type mysql
 
 echo "Installing WordPress"
 #Install WordPress
-virtualmin install-script --domain $DOMAIN --type wordpress --version latest --path /wordpress/ --db mysql $WPDB
+virtualmin install-script --domain $DOMAIN --type wordpress --version latest --path / --db mysql $WPDB
 
 echo "Configuring WordPress"
 #Confiure mysql database access in wp-config.php
 
 #/** The name of the database for WordPress */
-sed -i -- 's/database_name_here/'"$WPDB"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
+sed -i -- 's/database_name_here/'"$WPDB"'/g' /home/"$DOMAINUSER"/public_html/wp-config.php
 
 # /** MySQL database username */
-sed -i -- 's/username_here/'"$DOMAINUSER"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
+sed -i -- 's/username_here/'"$DOMAINUSER"'/g' /home/"$DOMAINUSER"/public_html/wp-config.php
 
 #/** MySQL database password */
-sed -i -- 's/password_here/'"$PASSWD"'/g' /home/"$DOMAINUSER"/public_html/wordpress/wp-config.php
+sed -i -- 's/password_here/'"$PASSWD"'/g' /home/"$DOMAINUSER"/public_html/wp-config.php
 
 #End WordPress Install
 echo "installing Wordress CLI"
@@ -79,17 +79,17 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 #End Wordpress CLI install
-#echo "Configuring WordPress as multisite"
+echo "Configuring WordPress as multisite"
 #Configure WordPress multisite
-#sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/wordpress/ --url=http://"$DOMAIN"/wordpress/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
-#wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/wordpress/.htaccess
+sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
+wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/wordpress/.htaccess
 
 echo "Installin WordPress Plugins"
 #install WordPress Plugins
-sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bmlt-wordpress-satellite-plugin --activate-network
-sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bread --activate-network
-sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install crouton --activate-network
-sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/wordpress/ plugin install bmlt-tabbed-map --activate-network
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
 
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
