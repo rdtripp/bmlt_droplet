@@ -165,5 +165,4 @@ echo "make note of the following info to set up the BMLT root server"
 echo "BMLT database: $BMLTDB"
 echo "BMLT database user: $DOMAINUSER"
 echo "BMLT database password: $PASSWD" 
-#Reboot system
-#reboot
+echo "Please reboot after making note of above info"
