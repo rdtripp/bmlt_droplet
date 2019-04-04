@@ -44,19 +44,22 @@ wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/ins
 
 10.  You will end up with (if you used vhost.yourdomain.org for the virtual host (the droplet you created) and yourdomain.org as the virtual server) :
 
-  1.Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
+  Virtualmin login using root credentials:  https://vhost.yourdomain.org:10000
 
- 2. yap admin at :  https://yourdomain.org/yap/admin
+  yap admin at :  https://yourdomain.org/yap/admin
 
- 3. Wordpress multisite admin login (using credentials you entered ):
+  Wordpress multisite admin login (using credentials you entered ):
 https://yourdomain.org/wordpress/wp-admin  (wordpress-satellite-plugin, bmlt-tabbed-map, bread, and crouton are preinstalled)
 
- 4.  BMLT root server install wizard at:  https://yourdomain.org/main_server/  #Note: If setting up a root server make sure to copy the setup info displayed at the completion of the install script.
+  BMLT root server install wizard at:  https://yourdomain.org/main_server/  #Note: If setting up a root server make sure to copy the setup info displayed at the completion of the install script.
 
-Before you can use yap:
- 1. initialize the database by going to https://yourdomain.org/yap/update-advisor.php.  It should tell you that you are "ready to yap"
- 2.  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
- 3.  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
+Before you can use yap you must:
 
-I wrote this to accomidate a service body such as a region needing to set up a Website, a full BMLT stack, and a website for each areas in a subdirectory format WordPress multisite install.  Other service bodies can use whatever portion they need and delete the rest (after playing with it of course).
+  Initialize the database by going to https://yourdomain.org/yap/update-advisor.php.  It should tell you that you are "ready to yap"
+  
+  Set up the voice portion of your twilio number as a http get and point it at https://yourdomain.org/yap/index.php
+ 
+  Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
+
+I wrote this to accomidate a service body such as a region needing to set up a Website, a full BMLT stack, and a website for each areas in a subdirectory format WordPress multisite install.  Other service bodies can use whatever portion they need and delete the rest (after playing with it of course).  Let me know if you use this and any thoughts on how it could be improved.
 
