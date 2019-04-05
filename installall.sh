@@ -167,7 +167,7 @@ cd /home/"$DOMAINUSER"/public_html/
 wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/bmlt-root-server.zip
 
 unzip ./bmlt-root-server.zip
-wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server.htaccess
+wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
 chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
 
