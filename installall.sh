@@ -96,7 +96,7 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
-
+apt-get install jq
 echo "Starting Yap Installation"
 #set yap database name
 YAPDB="yap_$DOMAINUSER"
@@ -109,9 +109,8 @@ echo "Downloading YAP & Preparing files"
 #Get YAP
 mkdir /home/"$DOMAINUSER"/public_html/yap
 cd /home/"$DOMAINUSER"/public_html/yap
-
-#Edit the url on the following line to reflect the latest stable version of yap
-wget https://github.com/bmlt-enabled/yap/releases/download/3.0.2/yap-3.0.2.zip
+#Download latest yap stable
+curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
 
 unzip *.zip
 chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
@@ -163,8 +162,8 @@ virtualmin create-database --domain $DOMAIN --name $BMLTDB --type mysql
 echo "Downloading and Preparing files"
 cd /home/"$DOMAINUSER"/public_html/
 
-#Edit the url on the following line to reflect the latest stable version of BMLT Root Server
-wget https://github.com/bmlt-enabled/bmlt-root-server/releases/download/2.12.6/bmlt-root-server.zip
+#downlaoad latest stable version of BMLT Root Server
+curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
 
 unzip ./bmlt-root-server.zip
 wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
