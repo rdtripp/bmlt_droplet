@@ -21,7 +21,7 @@ Install Procedure:
 7.  Power the server back up and log back in via terminal.
 8.  Paste in the following command and into the terminal and press enter:
 
-wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/installall.sh
+wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/alpha/installall.sh
 
 9.  Virtualmin Minimal is the default Virtualmin install.  If you want the full install then open the installall.sh script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install.
 
