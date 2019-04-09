@@ -48,7 +48,7 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 #End virtual domain install
 
 #Installing additional packages
-apt install php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip jq
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip jq
 
 # 
 INSTALLWP = "n"
