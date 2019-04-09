@@ -143,7 +143,7 @@ sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' 
 read -p "Please enter your twilio Auth Token:   " TWILAUTHTOK
 sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-read -p "Please BMLT root server user name:   "  BMLTUSR
+read -p "Please enter your BMLT root server user name:   "  BMLTUSR
 sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
 read -p "Please enter your BMLT root server password:   "  BMLTPASS
