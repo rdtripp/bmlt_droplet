@@ -57,7 +57,7 @@ if [[ $INSTALLWP == 'y' ]]; then
 
 read -p "Enter Admin User for WordPress:   " WPADMIN
 read -p "Enter WordPress Admin User Password:   " WPADMINPASS
-read -p "Enter WordPress Default Site Name:   " WPSITENAME
+read -p "Enter WordPress Site Name:   " WPSITENAME
 
 echo " Starting WordPress Install"
 Start WordPress Install
@@ -103,7 +103,9 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
 fi
-*-
+INSTALLYAP = "n"
+read -p "Do you want to install YAP? (y/n) n  " INSTALLWP
+if [[ $INSTALLWP == 'y' ]]; then
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
 echo "Starting Yap Installation"
@@ -158,7 +160,11 @@ sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMA
 #edit .htaccess so yap will run under virtualmin
 echo "Editing .htaccess for yap"
 sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+fi
 
+INSTALLBMLT = "n"
+read -p "Do you want to install a BMLT Root Server? (y/n) n  " INSTALLBMLT
+if [[ $INSTALLBMLT == 'y' ]]; then
 echo "BMLT Root Server Install"
 #BMLT Root Server Installation
 
@@ -178,11 +184,12 @@ unzip ./bmlt-root-server.zip
 wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
 chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
+fi
 
-echo "Setup completed successfully!!"
 echo "make note of the following info to set up the BMLT root server"
 echo "BMLT database: $BMLTDB"
 echo "BMLT database user: $DOMAINUSER"
 echo "BMLT database password: $PASSWD" 
 echo "Google Maps API Key: $GMAPAPI"
 echo "Please reboot after making note of above info"
+echo "Setup completed successfully!!"
