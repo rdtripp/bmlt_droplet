@@ -50,9 +50,7 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 #Installing additional packages
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip jq
 
-# 
-INSTALLWP = "n"
-read -p "Do you want to install WordPress? (y/n) n  " INSTALLWP
+read -p "Do you want to install WordPress? (y/n)   " INSTALLWP
 if [[ $INSTALLWP == 'y' ]]; then
 
     read -p "Enter Admin User for WordPress:   " WPADMIN
@@ -102,9 +100,9 @@ if [[ $INSTALLWP == 'y' ]]; then
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
 fi
-INSTALLYAP = "n"
-read -p "Do you want to install YAP? (y/n) n  " INSTALLWP
-if [[ $INSTALLWP == 'y' ]]; then
+
+read -p "Do you want to install YAP? (y/n) " INSTALLYAP
+if [[ $INSTALLYAP == 'y' ]]; then
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
 echo "Starting Yap Installation"
@@ -161,8 +159,8 @@ echo "Editing .htaccess for yap"
 sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 fi
 
-INSTALLBMLT = "n"
-read -p "Do you want to install a BMLT Root Server? (y/n) n  " INSTALLBMLT
+
+read -p "Do you want to install a BMLT Root Server? (y/n)  " INSTALLBMLT
 if [[ $INSTALLBMLT == 'y' ]]; then
 echo "BMLT Root Server Install"
 #BMLT Root Server Installation
