@@ -184,6 +184,6 @@ echo "BMLT database: $BMLTDB"
 echo "BMLT database user: $DOMAINUSER"
 echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/" 
 fi
-
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root"
 echo "Setup completed successfully!!"
 echo "Please reboot"
