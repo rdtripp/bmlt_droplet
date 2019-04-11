@@ -49,7 +49,7 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 #End virtual domain install
 
 read -p "Do you want to install WordPress? (y or n)   " INSTALLWP
-if [[ $INSTALLWP == 'y' ]]; then
+if [ $INSTALLWP == 'y' ]; then
 read -p "Enter Admin User for WordPress:   " WPADMIN
 read -p "Enter WordPress Admin User Password:   " WPADMINPASS
 read -p "Enter WordPress Default Site Name:   " WPSITENAME
