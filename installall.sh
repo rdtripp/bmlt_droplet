@@ -86,13 +86,12 @@ chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 #End Wordpress CLI install
 
-read -p "Do you want to install WordPress? (y or n) n  " INSTALLWPMS
+read -p "Do you want to install WordPress Multisite? (y or n) n  " INSTALLWPMS
 if [ "$INSTALLWPMS" = "y" ]; then
 echo "Configuring WordPress as multisite"
 #Configure WordPress multisite
 sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
 wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
-fi
 
 echo "Installin WordPress Plugins"
 #install WordPress Plugins
@@ -100,6 +99,13 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
+fi
+if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate
+sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate
+fi
 fi
 
 read -p "Do you want to install Yap? (y or n) n" INSTALLYAP
