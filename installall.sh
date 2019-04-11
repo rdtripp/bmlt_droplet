@@ -21,9 +21,7 @@ echo "Gathering Required Information for LAMP install"
 #Get user input 
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 read -p "Enter Password for Virtual Server:   "  PASSWD
-read -p "Enter Admin User for WordPress:   " WPADMIN
-read -p "Enter WordPress Admin User Password:   " WPADMINPASS
-read -p "Enter WordPress Default Site Name:   " WPSITENAME
+
  
 #Sets correct time and date, edit to reflect your timezone
 sudo timedatectl set-timezone America/Chicago
@@ -50,6 +48,11 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual domain install
 
+read -p "Do you want to install WordPress? (y or n)   " INSTALLWP
+if [[ $INSTALLWP == 'y' ]]; then
+read -p "Enter Admin User for WordPress:   " WPADMIN
+read -p "Enter WordPress Admin User Password:   " WPADMINPASS
+read -p "Enter WordPress Default Site Name:   " WPSITENAME
 echo " Starting WordPress Install"
 Start WordPress Install
 #set wordpress database name
@@ -93,14 +96,14 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
+fi
 
+apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
-apt-get install jq
 echo "Starting Yap Installation"
 #set yap database name
 YAPDB="yap_$DOMAINUSER"
-
 echo "Creating YAP database"
 #create database for YAP
 virtualmin create-database --domain $DOMAIN --name $YAPDB --type mysql
