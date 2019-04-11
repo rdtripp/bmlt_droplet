@@ -85,10 +85,14 @@ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.pha
 chmod +x wp-cli.phar
 sudo mv wp-cli.phar /usr/local/bin/wp
 #End Wordpress CLI install
+
+read -p "Do you want to install WordPress? (y or n) n  " INSTALLWPMS
+if [ "$INSTALLWPMS" = "y" ]; then
 echo "Configuring WordPress as multisite"
 #Configure WordPress multisite
 sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
 wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
+fi
 
 echo "Installin WordPress Plugins"
 #install WordPress Plugins
@@ -177,13 +181,24 @@ unzip ./bmlt-root-server.zip
 wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
 chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
+ 
+fi
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root"
+if [ "$INSTALLWP" = "y" ]; then
+echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ using the credentials you supplied during setup"
+fi
 
+if [ "$INSTALLYAP" = "y" ]; then
+echo " To initailize the Yap Database go to https://$DOMAIN/yap/upgrade-advisor.php"
+echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"
+fi
 
+if [ "$INSTALLBMLT" = "y" ]; then
 echo "make note of the following info to set up the BMLT root server"
 echo "BMLT database: $BMLTDB"
 echo "BMLT database user: $DOMAINUSER"
-echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/" 
+echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
-echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root"
+
 echo "Setup completed successfully!!"
 echo "Please reboot"
