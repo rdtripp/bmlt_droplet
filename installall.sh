@@ -54,7 +54,6 @@ if [ "$INSTALLWP" = "y" ]; then
     read -p "Enter WordPress Admin User Password:   " WPADMINPASS
     read -p "Enter WordPress Default Site Name:   " WPSITENAME
     echo " Starting WordPress Install"
-    Start WordPress Install
     #set wordpress database name
     WPDB="wp_$DOMAINUSER"
     # create database for wordpress
