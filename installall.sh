@@ -98,6 +98,8 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
 fi
 
+read -p "Do you want to install Yap? (y or n)   " INSTALLYAP
+if [ "$INSTALLYAP" = "y" ]; then
 apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 #Updates system to reflect new sources added by installs
 apt-get update && apt-get -y update
@@ -152,7 +154,10 @@ sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMA
 #edit .htaccess so yap will run under virtualmin
 echo "Editing .htaccess for yap"
 sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+fi
 
+read -p "Do you want to install BMLT Root Server? (y or n)   " INSTALLBMLT
+if [ "$INSTALLBMLT" = "y" ]; then
 echo "BMLT Root Server Install"
 #BMLT Root Server Installation
 
@@ -173,10 +178,13 @@ wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/mast
 chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
 rm *zip
 
-echo "Setup completed successfully!!"
+
 echo "make note of the following info to set up the BMLT root server"
 echo "BMLT database: $BMLTDB"
 echo "BMLT database user: $DOMAINUSER"
 echo "BMLT database password: $PASSWD" 
 echo "Google Maps API Key: $GMAPAPI"
-echo "Please reboot after making note of above info"
+fi
+
+echo "Setup completed successfully!!"
+echo "Please reboot"
