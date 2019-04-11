@@ -48,7 +48,7 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual domain install
 
-read -p "Do you want to install WordPress? (y or n)   " INSTALLWP
+read -p "Do you want to install WordPress? (y or n) n  " INSTALLWP
 if [ "$INSTALLWP" = "y" ]; then
 read -p "Enter Admin User for WordPress:   " WPADMIN
 read -p "Enter WordPress Admin User Password:   " WPADMINPASS
@@ -98,7 +98,7 @@ sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin in
 sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
 fi
 
-read -p "Do you want to install Yap? (y or n)   " INSTALLYAP
+read -p "Do you want to install Yap? (y or n) n" INSTALLYAP
 if [ "$INSTALLYAP" = "y" ]; then
 apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 #Updates system to reflect new sources added by installs
@@ -156,7 +156,7 @@ echo "Editing .htaccess for yap"
 sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 fi
 
-read -p "Do you want to install BMLT Root Server? (y or n)   " INSTALLBMLT
+read -p "Do you want to install BMLT Root Server? (y or n) n " INSTALLBMLT
 if [ "$INSTALLBMLT" = "y" ]; then
 echo "BMLT Root Server Install"
 #BMLT Root Server Installation
