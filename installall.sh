@@ -197,7 +197,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
 fi
 
 cp -R /root/bmlt_ubuntu_virtualmin /home/$ADMINUSER/
-chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/bmlt_ubuntu_virtualmin
+chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/bmlt_ubuntu_virtualmin/
 cd
 rm -rf ./bmlt_ubuntu_virtualmin
 
@@ -253,7 +253,7 @@ echo ""
 echo ""
 
 echo "A reboot is required"
-read -p "Do you want to reboot now? (y or n) n " REBOOT
+read -p "Do you want to reboot now? (y or n) n   "  REBOOT
 if [ "$REBOOT " = "y" ]; then
     reboot
 fi    
