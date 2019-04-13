@@ -195,6 +195,7 @@ fi
 
 if [ "$INSTALLYAP" = "y" ]; then
     echo " To initailize the Yap Database go to https://$DOMAIN/yap/upgrade-advisor.php"
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php
     echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"
 fi
 
