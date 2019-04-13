@@ -4,6 +4,11 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
+echo " Adding a sudo user.  Do NOT user your domain name or any portion of it!"
+read -p "Enter Name for sudo user:   "  ADMINUSER
+adduser $ADMINUSER
+usermod -aG sudo $ADMINUSER
+
 echo "Checking for updates on base system and adding additional packages"
 #Updates base system
 apt-get update && apt-get -y update
