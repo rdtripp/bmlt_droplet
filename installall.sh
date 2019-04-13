@@ -8,7 +8,7 @@ echo "Checking for updates on base system and adding additional packages"
 #Updates base system
 apt-get update && apt-get -y update
 #Adds additional packages
-apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
 echo "configuring swap file"
 #Configure swap file
