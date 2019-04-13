@@ -192,10 +192,28 @@ if [ "$INSTALLBMLT" = "y" ]; then
     rm *zip
 fi
 
-echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root"
+echo  "Please make note of the following information"
+
+echo ""
+echo ""
+
+echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
+
+echo ""
+echo ""
+
+echo "The sudo user is $ADMINUSER with the password you supplied during setup"
+
+echo ""
+echo ""
+
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
+
+echo ""
+echo ""
 
 if [ "$INSTALLWP" = "y" ]; then
-    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ using the credentials you supplied during setup"
+    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
 
 echo ""
