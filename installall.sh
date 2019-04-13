@@ -7,7 +7,7 @@ chmod ugo+rwXt /tmp
 echo " Adding a sudo user.  Do NOT user your domain name or any portion of it!"
 read -p "Enter name for sudo user:   "  ADMINUSER
 read -p "Enter password for sudo user: "  ADMINPASS
-useradd $ADMINUSER -p $ADMINPASS
+useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
 echo "Checking for updates on base system and adding additional packages"
