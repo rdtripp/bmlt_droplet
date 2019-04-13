@@ -86,7 +86,7 @@ if [ "$INSTALLWP" = "y" ]; then
     #End Wordpress CLI install
 fi
 
-read -p "Do you want to install WordPress Multisite? (y or n) n  " INSTALLWPMS
+read -p "Do you want to enable WordPress Multisite? (y or n) n  " INSTALLWPMS
 if [ "$INSTALLWPMS" = "y" ]; then
     echo "Configuring WordPress as multisite"
     #Configure WordPress multisite
