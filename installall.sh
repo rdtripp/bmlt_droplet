@@ -47,6 +47,14 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual domain install
 
+echo "installing Wordress CLI"
+#Install Wordpress CLI
+apt-get update && apt-get -y install curl
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp
+#End Wordpress CLI install
+
 
 
 
