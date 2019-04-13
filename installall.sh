@@ -175,6 +175,9 @@ fi
 
 read -p "Do you want to install BMLT Root Server? (y or n) n " INSTALLBMLT
 if [ "$INSTALLBMLT" = "y" ]; then
+    if [ "$INSTALLYAP" != "y" ]; then
+        read -p "Please enter your Google Maps API key:   "  GMAPAPI
+     fi    
     echo "BMLT Root Server Install"
     #BMLT Root Server Installation
     echo "Creating database"
@@ -192,7 +195,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
     rm *zip
 fi
 
-cp -R ./bmlt_ubuntu_virtualmin /home/$ADMINUSER/
+cp -R /root/bmlt_ubuntu_virtualmin /home/$ADMINUSER/
 chown -R /home/$ADMINUSER/bmlt_ubuntu_virtualmin
 cd
 rm -rf ./bmlt_ubuntu_virtualmin
