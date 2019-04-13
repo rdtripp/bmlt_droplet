@@ -193,11 +193,17 @@ if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ using the credentials you supplied during setup"
 fi
 
+echo ""
+echo ""
+
 if [ "$INSTALLYAP" = "y" ]; then
-    echo " To initailize the Yap Database go to https://$DOMAIN/yap/upgrade-advisor.php"
+    echo " Checking Yap configuration and initializing database"
     curl -k https://$DOMAIN/yap/upgrade-advisor.php
     echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"
 fi
+
+echo ""
+echo ""
 
 if [ "$INSTALLBMLT" = "y" ]; then
     echo "make note of the following info to set up the BMLT root server"
@@ -206,5 +212,12 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
 
+echo ""
+echo ""
+
 echo "Setup completed successfully!!"
+
+echo ""
+echo ""
+
 echo "Please reboot"
