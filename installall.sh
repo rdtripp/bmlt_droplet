@@ -198,8 +198,9 @@ if [ "$INSTALLBMLT" = "y" ]; then
     rm *zip
 fi
 
-cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/
-chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/bmlt_ubuntu_virtualmin/
+mkdir /home/$ADMINUSER/src
+cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/src/
+chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/src/
 cd
 rm -rf ./bmlt_ubuntu_virtualmin
 
