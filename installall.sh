@@ -94,19 +94,21 @@ if [ "$INSTALLWP" = "y" ]; then
     #End Wordpress CLI install
 fi
 
-read -p "Do you want to enable WordPress Multisite? (y or n) n  " INSTALLWPMS
-if [ "$INSTALLWPMS" = "y" ]; then
-    echo "Configuring WordPress as multisite"
-    #Configure WordPress multisite
-    sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
-    wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
+if [ "$INSTALLWP" = "y" ]; then
+    read -p "Do you want to enable WordPress Multisite? (y or n) n  " INSTALLWPMS
+    if [ "$INSTALLWPMS" = "y" ]; then
+        echo "Configuring WordPress as multisite"
+        #Configure WordPress multisite
+        sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
+        wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
 
-    echo "Installin WordPress Plugins"
-    #install WordPress Plugins
-    sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
-    sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
-    sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
-    sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
+        echo "Installin WordPress Plugins"
+        #install WordPress Plugins
+        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
+        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
+        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html / plugin install crouton --activate-network
+        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
+     fi  
 fi
 
 if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
