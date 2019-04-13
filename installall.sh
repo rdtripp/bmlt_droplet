@@ -256,7 +256,7 @@ echo ""
 echo ""
 
 echo "A reboot is required"
-read -p "Do you want to reboot now? (y or n) n   "  REBOOT
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
 if [ "$REBOOT " = "y" ]; then
-    sudo reboot
+    shutdown -r now
 fi    
