@@ -173,9 +173,9 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo "BMLT Root Server Install"
     #BMLT Root Server Installation
     echo "Creating database"
-    #set database name
+    #Set database name
     BMLTDB="bmlt_$DOMAINUSER"
-    reate database
+    #Create database
     virtualmin create-database --domain $DOMAIN --name $BMLTDB --type mysql
     echo "Downloading and Preparing files"
     cd /home/"$DOMAINUSER"/public_html/
