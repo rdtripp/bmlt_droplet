@@ -5,8 +5,9 @@ chown root:root /tmp
 chmod ugo+rwXt /tmp
 
 echo " Adding a sudo user.  Do NOT user your domain name or any portion of it!"
-read -p "Enter Name for sudo user:   "  ADMINUSER
-adduser $ADMINUSER
+read -p "Enter name for sudo user:   "  ADMINUSER
+read -p "Enter password for sudo user: "  ADMINPASS
+useradd $ADMINUSER -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
 echo "Checking for updates on base system and adding additional packages"
@@ -210,7 +211,7 @@ echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
 echo ""
 echo ""
 
-echo "The sudo user is $ADMINUSER with the password you supplied during setup"
+echo "The sudo user is $ADMINUSER with the password $ADMINPASS"
 
 echo ""
 echo ""
