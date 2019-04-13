@@ -197,7 +197,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
 fi
 
 cp -R /root/bmlt_ubuntu_virtualmin /home/$ADMINUSER/
-chown -R /home/$ADMINUSER/bmlt_ubuntu_virtualmin
+chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/bmlt_ubuntu_virtualmin
 cd
 rm -rf ./bmlt_ubuntu_virtualmin
 
