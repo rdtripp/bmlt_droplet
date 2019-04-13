@@ -192,6 +192,11 @@ if [ "$INSTALLBMLT" = "y" ]; then
     rm *zip
 fi
 
+cp -R ./bmlt_ubuntu_virtualmin /home/$ADMINUSER/
+chown -R /home/$ADMINUSER/bmlt_ubuntu_virtualmin
+cd
+rm -rf ./bmlt_ubuntu_virtualmin
+
 echo  "Please make note of the following information"
 
 echo ""
