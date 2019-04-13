@@ -4,9 +4,11 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
-echo "Checking for updates on base system"
+echo "Checking for updates on base system and adding additional packages"
 #Updates base system
 apt-get update && apt-get -y update
+#Adds additional packages
+apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
 echo "configuring swap file"
 #Configure swap file
@@ -111,7 +113,6 @@ fi
 
 read -p "Do you want to install Yap? (y or n) n" INSTALLYAP
 if [ "$INSTALLYAP" = "y" ]; then
-    apt install php-curl php-gd php-mbstring php-xml php-xmlrpc jq
     #Updates system to reflect new sources added by installs
     apt-get update && apt-get -y update
     echo "Starting Yap Installation"
