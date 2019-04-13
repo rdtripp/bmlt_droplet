@@ -251,4 +251,8 @@ echo "Setup completed successfully!!"
 echo ""
 echo ""
 
-echo "Please reboot"
+echo "A reboot is required"
+read -p "Do you want to reboot now? (y or n) n " REBOOT
+if [ "$REBOOT " = "y" ]; then
+    reboot
+fi    
