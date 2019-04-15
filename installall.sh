@@ -13,8 +13,6 @@ usermod -aG sudo $ADMINUSER
 echo "Checking for updates on base system and adding additional packages"
 #Updates base system
 apt-get update && apt-get -y update
-#Adds additional packages
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
 echo "configuring swap file"
 #Configure swap file
@@ -55,6 +53,9 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual domain install
+
+#Add additional packages
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
 read -p "Do you want to install WordPress? (y or n) n  " INSTALLWP
 if [ "$INSTALLWP" = "y" ]; then
@@ -264,6 +265,6 @@ echo ""
 
 echo "A reboot is required"
 read -p "Do you want to reboot now? (y or n) n     "    REBOOT
-if [ "$REBOOT " = "y" ]; then
-    echo "it should be shutting down"
+if [ "$REBOOT" = "y" ]; then
+    halt --reboot
 fi    
