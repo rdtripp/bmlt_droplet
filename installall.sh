@@ -195,7 +195,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
     #downlaoad latest stable version of BMLT Root Server
     curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
     unzip ./bmlt-root-server.zip
-    wget -cO - https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/master/htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
+    cat ./.htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
     chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
     rm *zip
 fi
