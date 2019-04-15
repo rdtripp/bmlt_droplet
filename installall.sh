@@ -141,11 +141,10 @@ if [ "$INSTALLYAP" = "y" ]; then
     echo "Downloading YAP & Preparing files"
     #Get YAP
     mkdir /home/"$DOMAINUSER"/public_html/yap
-    cd /home/"$DOMAINUSER"/public_html/yap
     #Download latest yap stable
-    curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
-
-    unzip *.zip
+    curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i - 
+    unzip yap*.zip -d /home/"$DOMAINUSER"/public_html/yap/
+    rm *.zip
     chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
 
     echo "Configuring YAP"
