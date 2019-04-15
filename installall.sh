@@ -100,7 +100,7 @@ if [ "$INSTALLWP" = "y" ]; then
         echo "Configuring WordPress as multisite"
         #Configure WordPress multisite
         sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
-        cat ./.htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
+        cat ./htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
 
         echo "Installin WordPress Plugins"
         #install WordPress Plugins
@@ -195,7 +195,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
     #downlaoad latest stable version of BMLT Root Server
     curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
     unzip ./bmlt-root-server.zip
-    cat ./.htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
+    cat ./htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
     chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
     rm *zip
 fi
