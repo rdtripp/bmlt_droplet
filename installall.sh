@@ -196,12 +196,11 @@ if [ "$INSTALLBMLT" = "y" ]; then
     #Create database
     virtualmin create-database --domain $DOMAIN --name $BMLTDB --type mysql
     echo "Downloading and Preparing files"
-    cd /home/"$DOMAINUSER"/public_html/
     #downlaoad latest stable version of BMLT Root Server
     curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
-    unzip ./bmlt-root-server.zip
+    unzip ./bmlt-root-server.zip -d /home/"$DOMAINUSER"/public_html/
     cat ./htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
-    chown -R "$DOMAINUSER":"$DOMAINUSER" ./main_server
+    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/main_server/main_server
     rm *zip
 fi
 
