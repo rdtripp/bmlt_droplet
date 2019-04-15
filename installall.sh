@@ -4,7 +4,7 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
-echo " Adding a sudo user.  Do NOT user your domain name or any portion of it!"
+echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 read -p "Enter name for sudo user:   "  ADMINUSER
 read -p "Enter password for sudo user: "  ADMINPASS
 useradd $ADMINUSER -m -p $ADMINPASS
@@ -57,6 +57,10 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 #Add additional packages
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
+echo
+echo
+echo
+
 read -p "Do you want to install WordPress? (y or n) n  " INSTALLWP
 if [ "$INSTALLWP" = "y" ]; then
     read -p "Enter Admin User for WordPress:   " WPADMIN
@@ -100,6 +104,10 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
 
+echo
+echo
+echo
+
 if [ "$INSTALLWP" = "y" ]; then
     read -p "Do you want to enable WordPress Multisite? (y or n) n  " INSTALLWPMS
     if [ "$INSTALLWPMS" = "y" ]; then
@@ -118,6 +126,10 @@ if [ "$INSTALLWP" = "y" ]; then
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network    
      fi  
 fi
+
+echo
+echo
+echo
 
 if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
     sudo -u $DOMAINUSER wp core install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
@@ -184,6 +196,10 @@ if [ "$INSTALLYAP" = "y" ]; then
     sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 fi
 
+echo
+echo
+echo
+
 read -p "Do you want to install BMLT Root Server? (y or n) n " INSTALLBMLT
 if [ "$INSTALLBMLT" = "y" ]; then
     if [ "$INSTALLYAP" != "y" ]; then
@@ -208,35 +224,35 @@ fi
 mkdir /home/$ADMINUSER/src
 cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/src/
 chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/src/
-cd
+cd ..
 rm -rf ./bmlt_ubuntu_virtualmin
 
 echo  "Please make note of the following information"
 
-echo ""
-echo ""
+echo
+echo
 
 echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
 
-echo ""
-echo ""
+echo
+echo
 
 echo "The sudo user is $ADMINUSER with the password $ADMINPASS"
 
-echo ""
-echo ""
+echo
+echo
 
 echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
 
-echo ""
-echo ""
+echo
+echo
 
 if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
 
-echo ""
-echo ""
+echo
+echo
 
 if [ "$INSTALLYAP" = "y" ]; then
     echo " Checking Yap configuration and initializing database"
@@ -244,8 +260,8 @@ if [ "$INSTALLYAP" = "y" ]; then
     echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"
 fi
 
-echo ""
-echo ""
+echo
+echo
 
 if [ "$INSTALLBMLT" = "y" ]; then
     echo "make note of the following info to set up the BMLT root server"
@@ -254,13 +270,13 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
 
-echo ""
-echo ""
+echo
+echo
 
 echo "Setup completed successfully!!"
 
-echo ""
-echo ""
+echo
+echo
 
 echo "A reboot is required"
 read -p "Do you want to reboot now? (y or n) n     "    REBOOT
