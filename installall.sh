@@ -92,6 +92,11 @@ if [ "$INSTALLWP" = "y" ]; then
     chmod +x wp-cli.phar
     sudo mv wp-cli.phar /usr/local/bin/wp
     #End Wordpress CLI install
+    #Edit php.ini
+    sed -i -- 's/upload_max_filesize = 2M/upload_max_filesize = 720M/g' /home/"$DOMAINUSER"/etc/php.ini
+    sed -i -- 's/post_max_size = 8M/post_max_size = 64M/g' /home/"$DOMAINUSER"/etc/php.ini
+    sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /home/"$DOMAINUSER"/etc/php.ini
+    sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
 
 if [ "$INSTALLWP" = "y" ]; then
