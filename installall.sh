@@ -106,6 +106,7 @@ if [ "$INSTALLWP" = "y" ]; then
         echo "Configuring WordPress as multisite"
         #Configure WordPress multisite
         sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
+        echo "configuring .htaccess for WordPress multisite"
         cat ./htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
 
         echo "Installin WordPress Plugins"
