@@ -63,21 +63,10 @@ echo
 echo
 
 #WordPress Install
-while true
-do
-	read -r -p "Do you want to install WordPress? [Y/n]   "  INSTALLWP
-	case $INSTALLWP in
-	    [yY][eE][sS]|[yY])
-			echo "Yes"
-			;;
-	    [nN][oO]|[nN])
-			echo "No"
-	       		;;
-	    *)
-		echo "Invalid input..."
-		;;
-	esac
-done
+echo "Do you wish to install WordPress?"
+select INSTALLWP in "y" "n"; do
+    case $INSTALLWP in
+        y )   
 if [ "$INSTALLWP" = "y" ]; then
     read -p "Enter Admin User for WordPress:   " WPADMIN
     read -p "Enter WordPress Admin User Password:   " WPADMINPASS
@@ -119,7 +108,8 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /home/"$DOMAINUSER"/etc/php.ini
     sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
-
+esac
+done
 echo
 echo
 echo
