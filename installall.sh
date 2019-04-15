@@ -10,7 +10,7 @@ read -p "Enter password for sudo user: "  ADMINPASS
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
-echo "Checking for updates on base system and adding additional packages"
+echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y update
 
@@ -55,13 +55,29 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 #End virtual domain install
 
 #Add additional packages
+echo "Adding additional packages"
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
 
 echo
 echo
 echo
 
-read -p "Do you want to install WordPress? (y or n) n  " INSTALLWP
+#WordPress Install
+while true
+do
+	read -r -p "Do you want to install WordPress? [Y/n]   "  INSTALLWP
+	case $INSTALLWP in
+	    [yY][eE][sS]|[yY])
+			echo "Yes"
+			;;
+	    [nN][oO]|[nN])
+			echo "No"
+	       		;;
+	    *)
+		echo "Invalid input..."
+		;;
+	esac
+done
 if [ "$INSTALLWP" = "y" ]; then
     read -p "Enter Admin User for WordPress:   " WPADMIN
     read -p "Enter WordPress Admin User Password:   " WPADMINPASS
