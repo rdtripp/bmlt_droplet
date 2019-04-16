@@ -33,8 +33,8 @@ echo
 read -p "Enter Password for Virtual Server:   "  PASSWD
 
  
-#Sets correct time and date, edit to reflect your timezone
-sudo timedatectl set-timezone America/Chicago
+#Set correct time zone
+dpkg-reconfigure tzdata
 echo "Starting Virtualmin Installation"
 #Starts Virtualmin install
 #Downloads Virtualmin install script
