@@ -31,9 +31,9 @@ read -p "Enter Password for Virtual Server:   "  PASSWD
  
 #Sets correct time and date, edit to reflect your timezone
 sudo timedatectl set-timezone America/Chicago
-
 echo "Starting Virtualmin Installation"
 #Starts Virtualmin install
+
 #Downloads Virtualmin install script
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
