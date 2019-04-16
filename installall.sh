@@ -253,6 +253,7 @@ mkdir /home/$ADMINUSER/src
 cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/src/
 chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/src/
 
+clear
 echo  "Please make note of the following information"
 
 echo
