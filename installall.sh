@@ -289,19 +289,19 @@ echo
 echo
 
 if [ "$INSTALLYAP" = "y" ]; then
-    echo " Checking Yap configuration and initializing database"; \
+    echo "Checking Yap configuration and initializing database"; \
     echo 
     curl -k https://$DOMAIN/yap/upgrade-advisor.php; \
     echo
     echo
-    echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"; \
+    echo "To access Yap Admin Console go to https://$DOMAIN/yap/admin/"; \
 fi
 
 echo
 echo
 
 if [ "$INSTALLBMLT" = "y" ]; then
-    echo "make note of the following info to set up the BMLT root server"
+    echo "Make note of the following info to set up the BMLT root server:"
     echo
     echo "BMLT database: $BMLTDB"
     echo
