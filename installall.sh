@@ -122,7 +122,7 @@ if [ "$INSTALLWP" = "y" ]; then
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLWPMS=y;break;;
-        No ) INSTALLWPMS=n;break;
+        No ) INSTALLWPMS=n;break;;
         *) echo "Error select option 1 or 2";;
     esac
 done
