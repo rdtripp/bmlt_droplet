@@ -286,6 +286,7 @@ if [ "$INSTALLYAP" = "y" ]; then
     echo 
     curl -k https://$DOMAIN/yap/upgrade-advisor.php; \
     echo
+    echo
     echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"; \
 fi
 
@@ -299,13 +300,10 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo
     echo "BMLT database user: $DOMAINUSER"
     echo
+    echo "Google Maps API:  $GMAPAPI"
+    echo
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
-
-echo
-echo
-
-echo "Setup completed successfully!!"
 
 echo
 echo
