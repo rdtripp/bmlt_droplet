@@ -254,7 +254,7 @@ cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/src/
 chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/src/
 
 clear
-echo  "Please make note of the following information"
+echo  "Please make a copy of the following information:"
 
 echo
 echo
@@ -282,9 +282,9 @@ echo
 echo
 
 if [ "$INSTALLYAP" = "y" ]; then
-    echo " Checking Yap configuration and initializing database"
-    curl -k https://$DOMAIN/yap/upgrade-advisor.php
-    echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/"
+    echo " Checking Yap configuration and initializing database";
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php;
+    echo " To access Yap Admin Console go to https://$DOMAIN/yap/admin/";
 fi
 
 echo
