@@ -12,7 +12,7 @@ usermod -aG sudo $ADMINUSER
 
 echo "Checking for updates on base system"
 #Updates base system
-apt-get update && apt-get -y update
+apt-get update && apt-get -y upgrade
 
 echo "configuring swap file"
 #Configure swap file
@@ -161,7 +161,7 @@ select yn in "Yes" "No"; do
 done
 if [ "$INSTALLYAP" = "y" ]; then
     #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y update
+    apt-get update && apt-get -y upgrade
     echo "Starting Yap Installation"
     #set yap database name
     YAPDB="yap_$DOMAINUSER"
