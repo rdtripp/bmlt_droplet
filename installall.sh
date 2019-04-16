@@ -35,7 +35,7 @@ echo "Starting Virtualmin Installation"
 #Starts Virtualmin install
 #Downloads Virtualmin install script
 wget http://software.virtualmin.com/gpl/scripts/install.sh
-echo "Select the version of virtualmin you want to install"
+echo "Select the version of Virtualmin you want to install"
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo "Install Virtualmin Minimal (recommended) or Full? select 1 or 2"
