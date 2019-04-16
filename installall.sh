@@ -36,12 +36,12 @@ echo "Starting Virtualmin Installation"
 #Downloads Virtualmin install script
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 echo "Select the version of virtualmin you want to install"
-echo "Virtualmin Minimum is adequate for this application and takes less resources"
+echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
-echo "Install Virtualmin Minimum (recommended) or Full? select 1 or 2"
-select version in "Minimum" "Full"; do
+echo "Install Virtualmin Minimal (recommended) or Full? select 1 or 2"
+select version in "Minimal" "Full"; do
     case $version in   
-        Minimum ) sh ./install.sh -f -v -m;break;;
+        Minimal ) sh ./install.sh -f -v -m;break;;
         Full ) sh ./install.sh -f -v;break;;
         *) echo "Error select option 1 or 2";;
     esac
