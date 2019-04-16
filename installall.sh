@@ -33,6 +33,8 @@ read -p "Enter Password for Virtual Server:   "  PASSWD
 sudo timedatectl set-timezone America/Chicago
 echo "Starting Virtualmin Installation"
 #Starts Virtualmin install
+#Downloads Virtualmin install script
+wget http://software.virtualmin.com/gpl/scripts/install.sh
 echo "Select the version of virtualmin you want to install"
 echo "Virtualmin Minimum is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
@@ -44,10 +46,6 @@ select version in "Minimum" "Full"; do
         *) echo "Error select option 1 or 2";;
     esac
 done
-#Downloads Virtualmin install script
-wget http://software.virtualmin.com/gpl/scripts/install.sh
-
-
 #End Virtualmin Install
 
 echo "Creating virtual server"
