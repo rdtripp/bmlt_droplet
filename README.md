@@ -7,7 +7,7 @@ An account with twilio https://www.twilio.com/ , a phone# with them, ACCOUNT SID
 
 Google maps api key, instructions at https://bmlt.app/google-maps-api-keys-and-geolocation-issues/
 
-A domain that you can create dns A records. You will need at mimimum a domain for the droplet such as vhost.yourdomain.com and a domain for the virtual server such as yourdomain.com or something.yourdomain.com. WWW. for the virtual server is also recommended. If you do the full virtualmin install mail. for the virtual server is also recommended.
+A domain that you can create dns A records. You will need at mimimum a domain for the droplet such as vhost.yourdomain.com and a domain for the virtual server such as yourdomain.com or something.yourdomain.com. www. for the virtual server is also recommended. If you do the full virtualmin install mail. for the virtual server is also recommended.
 
 Install Procedure:
 
