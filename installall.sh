@@ -116,7 +116,13 @@ echo
 echo
 
 if [ "$INSTALLWP" = "y" ]; then
-    read -p "Do you want to enable WordPress Multisite? (y or n) n  " INSTALLWPMS
+     echo "Do you wish to install WordPress Multisite?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLWPMS=y;break;;
+        No ) INSTALLWPMS=n;break;;
+    esac
+done
     if [ "$INSTALLWPMS" = "y" ]; then
         echo "Configuring WordPress as multisite"
         #Configure WordPress multisite
@@ -146,8 +152,13 @@ if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate
 fi
-
-read -p "Do you want to install Yap? (y or n) n" INSTALLYAP
+ echo "Do you wish to install Yap?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLYAP=y;break;;
+        No ) INSTALLYAP=n;break;;
+    esac
+done
 if [ "$INSTALLYAP" = "y" ]; then
     #Updates system to reflect new sources added by installs
     apt-get update && apt-get -y update
@@ -206,8 +217,13 @@ fi
 echo
 echo
 echo
-
-read -p "Do you want to install BMLT Root Server? (y or n) n " INSTALLBMLT
+echo "Do you wish to install the BMLT Root Server?"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLBMLT=y;break;;
+        No ) INSTALLBMLT=n;break;;
+    esac
+done
 if [ "$INSTALLBMLT" = "y" ]; then
     if [ "$INSTALLYAP" != "y" ]; then
         read -p "Please enter your Google Maps API key:   "  GMAPAPI
