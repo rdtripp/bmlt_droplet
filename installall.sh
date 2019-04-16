@@ -41,6 +41,7 @@ select version in "Minimum" "Full"; do
     case $version in   
         Minimum ) sh ./install.sh -f -v -m;break;;
         Full ) sh ./install.sh -f -v;break;;
+        *) echo "Error select option 1 or 2";;
     esac
 done
 #Downloads Virtualmin install script
@@ -70,6 +71,7 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLWP=y;break;;
         No ) INSTALLWP=n;break;;
+        *) echo "Error select option 1 or 2";;
     esac
 done
 if [ "$INSTALLWP" = "y" ]; then
@@ -122,7 +124,8 @@ if [ "$INSTALLWP" = "y" ]; then
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLWPMS=y;break;;
-        No ) INSTALLWPMS=n;break;;
+        No ) INSTALLWPMS=n;break;
+        *) echo "Error select option 1 or 2";;
     esac
 done
     if [ "$INSTALLWPMS" = "y" ]; then
@@ -159,6 +162,7 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLYAP=y;break;;
         No ) INSTALLYAP=n;break;;
+        *) echo "Error select option 1 or 2";;
     esac
 done
 if [ "$INSTALLYAP" = "y" ]; then
@@ -224,6 +228,7 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLBMLT=y;break;;
         No ) INSTALLBMLT=n;break;;
+        *) echo "Error select option 1 or 2";;
     esac
 done
 if [ "$INSTALLBMLT" = "y" ]; then
