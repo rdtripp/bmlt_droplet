@@ -24,8 +24,12 @@ echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
 echo "Gathering Required Information for LAMP install"
+echo
+echo
 #Get user input 
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
+echo
+echo
 read -p "Enter Password for Virtual Server:   "  PASSWD
 
  
@@ -38,6 +42,7 @@ wget http://software.virtualmin.com/gpl/scripts/install.sh
 echo "Select the version of Virtualmin you want to install"
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
+echo
 echo "Install Virtualmin Minimal (recommended) or Full? select 1 or 2"
 select version in "Minimal" "Full"; do
     case $version in   
@@ -100,6 +105,8 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/password_here/'"$PASSWD"'/g' /home/"$DOMAINUSER"/public_html/wp-config.php
 
     #End WordPress Install
+    echo
+    echo
     echo "installing Wordress CLI"
     #Install Wordpress CLI
     apt-get update && apt-get -y install curl
