@@ -5,8 +5,8 @@ chown root:root /tmp
 chmod ugo+rwXt /tmp
 
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
-read -p "Enter name for sudo user:   "  ADMINUSER
-read -p "Enter password for sudo user: "  ADMINPASS
+read -p "Enter a name for a sudo user:   "  ADMINUSER
+read -p "Enter a password for a sudo user: "  ADMINPASS
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
@@ -63,7 +63,7 @@ echo
 echo
 
 #WordPress Install
- echo "Do you wish to install WordPress?"
+ echo "Install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLWP=y;break;;
@@ -116,7 +116,7 @@ echo
 echo
 
 if [ "$INSTALLWP" = "y" ]; then
-     echo "Do you wish to install WordPress Multisite?"
+     echo "Enable WordPress Multisite? Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLWPMS=y;break;;
@@ -152,7 +152,7 @@ if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate
 fi
- echo "Do you wish to install Yap?"
+ echo "Install Yap?  Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLYAP=y;break;;
@@ -180,25 +180,25 @@ if [ "$INSTALLYAP" = "y" ]; then
 
     echo "Configuring YAP"
     #Configure yap
-    read -p "Please Enter Phone Greeting:   "  TITLE
+    read -p "Enter Phone Greeting (title in config.php):   "  TITLE
     sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please enter your BMLT root server:   "  ROOTSVR
+    read -p "Enter your BMLT root server:   "  ROOTSVR
     sed -i -- 's+$bmlt_root_server = "";+$bmlt_root_server = "'$ROOTSVR'";+g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please enter your Google Maps API key:   "  GMAPAPI
+    read -p "Enter your Google Maps API key:   "  GMAPAPI
     sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please enter your twilio account sid:   "  TWILACCTSID
+    read -p "Enter your twilio account sid:   "  TWILACCTSID
     sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please enter your twilio Auth Token:   " TWILAUTHTOK
+    read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
     sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please BMLT root server user name:   "  BMLTUSR
+    read -p "Enter your BMLT root server user name:   "  BMLTUSR
     sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Please enter your BMLT root server password:   "  BMLTPASS
+    read -p "Enter your BMLT root server password:   "  BMLTPASS
     sed -i -- 's/$bmlt_password = "";/$bmlt_password = "'$BMLTPASS'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
     sed -i -- 's/$mysql_hostname = "";/$mysql_hostname = "localhost";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
@@ -217,7 +217,7 @@ fi
 echo
 echo
 echo
- echo "Do you wish to install a BMLT Root Server?"
+ echo "Install a BMLT Root Server? Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLBMLT=y;break;;
@@ -226,7 +226,7 @@ select yn in "Yes" "No"; do
 done
 if [ "$INSTALLBMLT" = "y" ]; then
     if [ "$INSTALLYAP" != "y" ]; then
-        read -p "Please enter your Google Maps API key:   "  GMAPAPI
+        read -p "Enter your Google Maps API key:   "  GMAPAPI
      fi    
     echo "BMLT Root Server Install"
     #BMLT Root Server Installation
