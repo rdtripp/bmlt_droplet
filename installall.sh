@@ -33,18 +33,20 @@ read -p "Enter Password for Virtual Server:   "  PASSWD
 sudo timedatectl set-timezone America/Chicago
 echo "Starting Virtualmin Installation"
 #Starts Virtualmin install
-
+echo "Select the version of virtualmin you want to install"
+echo "Virtualmin Minimum is adequate for this application and takes less resources"
+echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
+echo "Install Virtualmin Minimum (recommended) or Full? select 1 or 2"
+select version in "Minimum" "Full"; do
+    case $version in   
+        Minimum ) sh ./install.sh -f -v -m;break;;
+        Full ) sh ./install.sh -f -v;break;;
+    esac
+done
 #Downloads Virtualmin install script
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
-#Select the version of virtualmin you want to install.  Make sure only the version you want to install is uncommented.
-#Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
 
-#Installs full Virtualmin
-#sh ./install.sh -f -v
-
-#Installs Virtualmin Minimum (default)
-sh ./install.sh -f -v -m
 #End Virtualmin Install
 
 echo "Creating virtual server"
