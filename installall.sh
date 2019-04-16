@@ -217,7 +217,7 @@ fi
 echo
 echo
 echo
-echo "Do you wish to install the BMLT Root Server?"
+ echo "Do you wish to install a BMLT Root Server?"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLBMLT=y;break;;
