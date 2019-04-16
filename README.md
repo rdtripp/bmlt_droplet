@@ -13,34 +13,21 @@ Install Procedure:
 
 Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one, you can upgrade later as needed) named (for example) vhost.yourdomain.org
 You will get a temp password and the fixed ip address emailed to you.
-Edit your dns records vhost.yourdomain.org (for example) and yourdomain.org, mail.yourdomain.org (optional) www.yourdomain.org (You can use something.yourdomain.org www.something.yourdomain.org ...... etc instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
+Edit your dns records for vhost.yourdomain.org (for example) and yourdomain.org, www.yourdomain.org (You can use something.yourdomain.org www.something.yourdomain.org ...... etc instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
 When dns updates, log in via terminal: ssh root@vhost.yourdomain.org and change the password
 power off the server: halt --poweroff
 Take a snapshot so you can revert back if you need to without having to redo dns.
-Power the server back up and log back in via terminal.
+Power the server back up and log back in via ssh via terminal.
 Paste in the following command and into the terminal and press enter:
-wget https://raw.githubusercontent.com/rdtripp/bmlt_ubuntu_virtualmin/alpha/installall.sh
 
-Virtualmin Minimal is the default Virtualmin install. If you want the full install then open the installall.sh script using nano or vim: nano ./installall.sh and edit to select the desired Virtualmin install.
-.............
-
-#Select the version of virtualmin you want to install. Make sure only the version you want to install is uncommented. #Virtualmin Minimum is everything you need unless you want a full-blown mail server with antivirus, antispam, etc.
-
-#Installs full Virtualmin
-
-#sh ./install.sh -f -v
-
-#Installs Virtualmin Minimum (default)
-
-sh ./install.sh -f -v -m
-
-...........
-
-Type command into terminal: sh ./installall.sh and press enter
+git clone https://github.com/rdtripp/bmlt_ubuntu_virtualmin.git; cd bmlt_ubuntu_virtualmin; chmod +x ./installall.sh; ./installall.sh
 
 Be prepared to answer the questions it asks:
 
+
 Enter FQDN for Virtual Server: <yourdomain.org for ex>
+
+Virtualmin Minimum is the recommended Virtualmin install. Only Select Virtualmin Full if you need a full blown mail server with antispam antivirus, etc.  Do not select Virtualmin Full if you don't know what you are doing.
 
 Enter Password for Virtual Server:
 
@@ -50,9 +37,9 @@ Enter WordPress Admin User Password:
 
 Enter WordPress Default Site Name:
 
-Please Enter Phone Greeting: <Thanks for calling the ........we're glad you're here for ex>
+Please Enter Phone Greeting: Thanks for calling the ........we're glad you're here for ex.
 
-Please enter your BMLT root server: <the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ . If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ >
+Please enter your BMLT root server: the BMLT root server for hosting your service body ex https://texasoklahomana.org/main_server/ . If you are using the root server installed in this script it would be https://yourdomain.org/main_server/ 
 
 Please enter your Google Maps API key:
 
@@ -81,4 +68,4 @@ Set up the voice portion of your twilio number as a http get and point it at htt
 
 Log in to virtualmin with root credentials and set up the virtual server cert with letsencrypt
 
-I wrote this to accomidate a service body such as a region needing to set up a Website, a full BMLT stack, and a website for each of its areas in a subdirectory format WordPress multisite install. Other service bodies can use whatever portion they need and delete the rest (after playing with it of course). Let me know if you use this and any thoughts on how it could be improved.
+
