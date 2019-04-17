@@ -3,7 +3,92 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
+apt update && apt -y install bind9-host curl
+#!/bin/bash
 
+DNSCHECK=0
+
+PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
+echo
+echo
+IPCHECKHOST=$(host -t A $(hostname -f) | sed 's/'$(hostname -f)' has address //g'); echo "The IP address of $(hostname -f) is $IPCHECKHOST"
+echo
+echo
+ if [ $IPCHECKHOST = $PUBIP ]; then
+         echo "$(hostname -f) dns is configured correctly"
+ fi
+
+echo
+echo
+  if [ $IPCHECKHOST != $PUBIP ]; then
+         echo "dns for this server, $(hostname -f) is not set up correctly or /etc/hostname and /etc/hosts are misconfigured, please correct the problem and run the install script again";
+         exit
+ fi
+
+read -p "Enter FQDN for Virtual Server:   "  DOMAIN
+echo
+echo
+IPCHECK=$(host -t A  $DOMAIN | sed 's/'$DOMAIN' has address //g'); echo "The IP address of $DOMAIN is $IPCHECK"
+echo
+echo
+if [ $IPCHECK = $PUBIP ]; then
+        echo "$DOMAIN  dns is not set up correctly, please correct the problem and run the install script again:";
+fi
+echo
+echo
+if [ $IPCHECK != $PUBIP ]; then
+        echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again";
+        exit
+fi
+echo
+echo
+IPCHECKWWW=$(host -t A  www.$DOMAIN | sed 's/'www.$DOMAIN' has address //g'); echo "The IP address of www.$DOMAIN is $IPCHECKWWW"
+echo
+echo
+if [ $IPCHECKWWW = $PUBIP ]; then
+        echo "www.$DOMAIN dns is configured correctly"; WWW=1;
+fi
+echo
+echo
+if [ $IPCHECKWWW != $PUBIP ]; then
+        echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
+        echo
+        echo "do you want to continue? select 1 or 2"
+        select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+        *)
+                echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+    done
+fi
+echo
+echo
+IPCHECKMAIL=$(host -t A  mail.$DOMAIN | sed 's/'mail.$DOMAIN' has address //g'); echo "The IP address of mail.$DOMAIN is $IPCHECKMAIL"
+echo
+echo
+if [ $IPCHECKMAIL = $PUBIP ]; then
+        echo "mail.$DOMAIN dns is configured correctly"; MAIL=1;
+fi
+
+
+if [ $IPCHECKMAIL != $PUBIP ]; then
+        echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
+        echo
+        echo "do you want to continue? select 1 or 2";
+        select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) break;;
+        No ) exit;;
+        *)
+                echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+    done
+fi
+
+echo $WWW
+echo $MAIL
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 read -p "Enter a name for a sudo user:   "  ADMINUSER
 read -p "Enter a password for a sudo user: "  ADMINPASS
@@ -67,7 +152,26 @@ apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
 echo
 echo
 echo
-
+echo "Install certificate from Letsencrypt? select 1 or 2"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLLE=y;break;;
+        No ) INSTALLLE=n;break;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+  done
+if [ "$INSTALLLE" = "y" ]; then
+echo "installing certificate from Letsencrypt"
+    if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
+        fi
+    if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
+        fi    
+    if [ "$WWW" != "1" ] && [ "$MAIL" = "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
+        fi
+fi
 #WordPress Install
  echo "Install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
