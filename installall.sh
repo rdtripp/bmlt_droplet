@@ -5,9 +5,8 @@ chown root:root /tmp
 chmod ugo+rwXt /tmp
 apt update && apt -y install bind9-host curl
 #!/bin/bash
-
-DNSCHECK=0
-
+WWW=0
+MAIL=0
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
@@ -32,7 +31,8 @@ IPCHECK=$(host -t A  $DOMAIN | sed 's/'$DOMAIN' has address //g'); echo "The IP 
 echo
 echo
 if [ $IPCHECK = $PUBIP ]; then
-        echo "$DOMAIN  dns is not set up correctly, please correct the problem and run the install script again:";
+        echo "$DOMAIN  dns set up correctly";
+        read -p "Enter Password for $DOMAIN :   "  PASSWD;
 fi
 echo
 echo
@@ -111,13 +111,6 @@ echo "vm.swappiness=10" >> /etc/sysctl.conf
 echo "Gathering Required Information for LAMP install"
 echo
 echo
-#Get user input 
-read -p "Enter FQDN for Virtual Server:   "  DOMAIN
-echo
-echo
-read -p "Enter Password for Virtual Server:   "  PASSWD
-
- 
 #Set correct time zone
 dpkg-reconfigure tzdata
 echo "Starting Virtualmin Installation"
