@@ -145,7 +145,7 @@ apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
 echo
 echo
 echo
-echo "Install ssl certificate from Letsencrypt? select 1 or 2"
+echo "Install certificate from Letsencrypt? select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLLE=y;break;;
@@ -159,11 +159,14 @@ echo "installing certificate from Letsencrypt"
         /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
         fi
     if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
-        fi    
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
+        fi
     if [ "$WWW" != "1" ] && [ "$MAIL" = "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
-        fi
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
+        fi
+    if [ "$WWW" != "1" ] && [ "$MAIL" != "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2
+        fi
 fi
 #WordPress Install
  echo "Install WordPress? select 1 or 2"
