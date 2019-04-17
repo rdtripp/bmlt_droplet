@@ -62,7 +62,7 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 
 #Add additional packages
 echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
 
 echo
 echo
