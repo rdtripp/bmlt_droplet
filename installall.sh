@@ -4,13 +4,12 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 apt update && apt -y install bind9-host curl dnsutils
-#!/bin/bash
 WWW=0
 MAIL=0
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
-IPCHECKHOST=$(host -t A $(hostname -f) | sed 's/'$(hostname -f)' has address //g'); echo "The IP address of $(hostname -f) is $IPCHECKHOST"
+IPCHECKHOST=$(dig +short $(hostname -f)); echo "The IP address of $(hostname -f) is $IPCHECKHOST"
 echo
 echo
  if [ $IPCHECKHOST = $PUBIP ]; then
@@ -27,7 +26,7 @@ echo
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 echo
 echo
-IPCHECK=$(host -t A  $DOMAIN | sed 's/'$DOMAIN' has address //g'); echo "The IP address of $DOMAIN is $IPCHECK"
+IPCHECK=$(dig +short $DOMAIN); echo "The IP address of $DOMAIN is $IPCHECK"
 echo
 echo
 if [ $IPCHECK = $PUBIP ]; then
@@ -42,7 +41,7 @@ if [ $IPCHECK != $PUBIP ]; then
 fi
 echo
 echo
-IPCHECKWWW=$(host -t A  www.$DOMAIN | sed 's/'www.$DOMAIN' has address //g'); echo "The IP address of www.$DOMAIN is $IPCHECKWWW"
+IPCHECKWWW=$(dig +short www.$DOMAIN); echo "The IP address of www.$DOMAIN is $IPCHECKWWW"
 echo
 echo
 if [ $IPCHECKWWW = $PUBIP ]; then
@@ -65,7 +64,7 @@ if [ $IPCHECKWWW != $PUBIP ]; then
 fi
 echo
 echo
-IPCHECKMAIL=$(host -t A  mail.$DOMAIN | sed 's/'mail.$DOMAIN' has address //g'); echo "The IP address of mail.$DOMAIN is $IPCHECKMAIL"
+IPCHECKMAIL=$(dig +short mail.$DOMAIN); echo "The IP address of mail.$DOMAIN is $IPCHECKMAIL"
 echo
 echo
 if [ $IPCHECKMAIL = $PUBIP ]; then
