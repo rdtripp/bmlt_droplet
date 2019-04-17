@@ -3,7 +3,7 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
-apt update && apt -y install bind9-host curl
+apt update && apt -y install bind9-host curl dnsutils
 #!/bin/bash
 WWW=0
 MAIL=0
