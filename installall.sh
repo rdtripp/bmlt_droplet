@@ -10,7 +10,7 @@ HOST=$(dig -x $PUBIP +short)
 echo
 echo
 VIRTHOST=$(hostname -f)
-if [[ $HOST != $VIRTHOST ]]; then
+if [[ "${HOST::-1}" != $VIRTHOST ]]; then
         echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
