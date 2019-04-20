@@ -8,6 +8,8 @@ PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
+read -p "Enter password for Virtual Server:   "  PASSWD
+echo
 echo
 IPCHECK=$(dig +short $DOMAIN);
 echo
