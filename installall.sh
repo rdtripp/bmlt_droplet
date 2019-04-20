@@ -392,6 +392,8 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo "BMLT database: $BMLTDB"
     echo
     echo "BMLT database user: $DOMAINUSER"
+    echo "BMLT database password:  $PASSWD"
+    echo
     echo
     echo "Google Maps API:  $GMAPAPI"
     echo
