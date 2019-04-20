@@ -98,7 +98,6 @@ echo "Select the version of Virtualmin you want to install"
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo
-#echo "Install Virtualmin Minimal (recommended) or Full? choose 1 or 2"
 select version in "Minimal" "Full"; do
     case $version in   
         Minimal ) sh ./install.sh -f -v -m;break;;
