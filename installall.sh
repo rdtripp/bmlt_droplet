@@ -12,7 +12,7 @@ HOSTREAL="${HOST::-1}"
 echo
 echo
 VIRTHOST=$(hostname -f)
-if [[ "$HOSTREAL != $VIRTHOST ]]; then
+if [[ $HOSTREAL != $VIRTHOST ]]; then
         echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
