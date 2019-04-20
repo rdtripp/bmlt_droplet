@@ -4,8 +4,6 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 apt update && apt -y install bind9-host curl dnsutils
-WWW=0
-MAIL=0
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
@@ -27,17 +25,14 @@ if [[ $IPCHECK != $PUBIP ]]; then
 fi
 echo
 echo
-IPCHECKWWW=$(dig +short www.$DOMAIN); echo "The IP address of www.$DOMAIN is $IPCHECKWWW"
+IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
 echo
-if [[ $IPCHECKWWW = $PUBIP ]]; then
-        echo "www.$DOMAIN dns is configured correctly"; WWW=1;
-fi
 echo
-echo
+WWW=1
 if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
-        echo
+        echo;WWW=0
         echo "do you want to continue? select 1 or 2"
         select yn in "Yes" "No"; do
     case $yn in
@@ -53,11 +48,11 @@ echo
 IPCHECKMAIL=$(dig +short mail.$DOMAIN)
 echo
 echo
-
+MAIL=1
 if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
         echo
-        echo "do you want to continue? select 1 or 2";
+        echo "do you want to continue? select 1 or 2";MAIL=0
         select yn in "Yes" "No"; do
     case $yn in
         Yes ) break;;
@@ -67,9 +62,6 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     esac
     done
 fi
-
-echo $WWW
-echo $MAIL
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 read -p "Enter a name for a sudo user:   "  ADMINUSER
 read -p "Enter a password for a sudo user: "  ADMINPASS
