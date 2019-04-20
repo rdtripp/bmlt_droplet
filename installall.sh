@@ -64,13 +64,9 @@ if [ $IPCHECKWWW != $PUBIP ]; then
 fi
 echo
 echo
-IPCHECKMAIL=$(dig +short mail.$DOMAIN); echo "The IP address of mail.$DOMAIN is $IPCHECKMAIL"
+IPCHECKMAIL=$(dig +short mail.$DOMAIN)
 echo
 echo
-if [ $IPCHECKMAIL = $PUBIP ]; then
-        echo "mail.$DOMAIN dns is configured correctly"; MAIL=1;
-fi
-
 
 if [ $IPCHECKMAIL != $PUBIP ]; then
         echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
