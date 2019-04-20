@@ -9,20 +9,6 @@ MAIL=0
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
-IPCHECKHOST=$(dig +short $(hostname -f)); echo "The IP address of $(hostname -f) is $IPCHECKHOST"
-echo
-echo
- if [ $IPCHECKHOST = $PUBIP ]; then
-         echo "$(hostname -f) dns is configured correctly"
- fi
-
-echo
-echo
-  if [ $IPCHECKHOST != $PUBIP ]; then
-         echo "dns for this server, $(hostname -f) is not set up correctly or /etc/hostname and /etc/hosts are misconfigured, please correct the problem and run the install script again";
-         exit
- fi
-
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 echo
 echo
