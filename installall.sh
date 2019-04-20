@@ -54,7 +54,7 @@ IPCHECKMAIL=$(dig +short mail.$DOMAIN)
 echo
 echo
 
-if [ $IPCHECKMAIL != $PUBIP ]; then
+if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
         echo
         echo "do you want to continue? select 1 or 2";
