@@ -7,6 +7,24 @@ apt update && apt -y install bind9-host curl dnsutils
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
+#!/bin/bash
+PUBIP=$(curl ipinfo.io/ip)
+DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
+VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
+VIRTHOST=$(hostname -f)
+
+echo $VIRTHOSTDNS
+echo $VIRTHOST
+
+
+if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
+        echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
+        exit
+fi
+echo "dns for virtual host $(hostname -f) is set up correctly"
+
+echo
+echo
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 read -p "Enter password for Virtual Server:   "  PASSWD
 echo
