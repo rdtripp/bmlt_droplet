@@ -15,13 +15,13 @@ echo
 IPCHECK=$(dig +short $DOMAIN); echo "The IP address of $DOMAIN is $IPCHECK"
 echo
 echo
-if [ $IPCHECK = $PUBIP ]; then
+if [[ $IPCHECK = $PUBIP ]]; then
         echo "$DOMAIN  dns set up correctly";
         read -p "Enter Password for $DOMAIN :   "  PASSWD;
 fi
 echo
 echo
-if [ $IPCHECK != $PUBIP ]; then
+if [[ $IPCHECK != $PUBIP ]]; then
         echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
@@ -30,12 +30,12 @@ echo
 IPCHECKWWW=$(dig +short www.$DOMAIN); echo "The IP address of www.$DOMAIN is $IPCHECKWWW"
 echo
 echo
-if [ $IPCHECKWWW = $PUBIP ]; then
+if [[ $IPCHECKWWW = $PUBIP ]]; then
         echo "www.$DOMAIN dns is configured correctly"; WWW=1;
 fi
 echo
 echo
-if [ $IPCHECKWWW != $PUBIP ]; then
+if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
         echo
         echo "do you want to continue? select 1 or 2"
