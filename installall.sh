@@ -14,24 +14,19 @@ if [[ "${HOST::-1}" != $VIRTHOST ]]; then
         echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
-        
-
+echo "dns for virtual host $(hostname -f) is set up correctly
 echo
 echo
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 echo
-echo
-echo
-if [[ $IPCHECK = $PUBIP ]]; then
-        echo "$DOMAIN  dns set up correctly";
-        read -p "Enter Password for $DOMAIN :   "  PASSWD;
-fi
+IPCHECK=$(dig +short $DOMAIN);
 echo
 echo
 if [[ $IPCHECK != $PUBIP ]]; then
         echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
+echo "$DOMAIN  dns set up correctly";
 echo
 echo
 IPCHECKWWW=$(dig +short www.$DOMAIN);
