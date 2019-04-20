@@ -267,7 +267,7 @@ if [ "$INSTALLYAP" = "y" ]; then
 
     echo "Configuring YAP"
     #Configure yap
-    read -p "Enter Phone Greeting (title in config.php):   "  TITLE
+    read -p "Enter Phone Greeting:   "  TITLE
     sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
     read -p "Enter your BMLT root server:   "  ROOTSVR
