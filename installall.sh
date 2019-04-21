@@ -185,10 +185,56 @@ select yn in "Yes" "No"; do
     esac
 done
 if [ "$INSTALLWP" = "y" ]; then
-    read -p "Enter Admin User for WordPress:   " WPADMIN
-    read -p "Enter WordPress Admin User Password:   " WPADMINPASS
-    read -p "Enter WordPress Default Site Name:   " WPSITENAME
-    echo " Starting WordPress Install"
+    while :
+        do
+            echo "Enter a name for the WordPress Admin user:"
+            read WPADMIN
+            if [$WPADMIN = ""]
+
+            then
+            echo "You have not entered a user name."
+            echo "Please try again."
+            continue
+
+            else
+            break
+
+        fi
+    done
+
+    while :
+        do
+            echo "Enter a password for the WordPress Admin user:"
+            read WPADMINPASS
+           if [$WPADMINPASS = ""]
+
+            then
+            echo "You have not entered a password."
+            echo "Please try again."
+            continue
+
+            else
+            break
+
+          fi
+    done
+
+while :
+    do
+            echo "Enter a name for the WordPress site:"
+            read WPSITENAME
+            if [$WPSITENAME = ""]
+
+            then
+            echo "You have not entered a valid site name."
+            echo "Please try again."
+            continue
+
+            else
+          break
+
+        fi
+   done
     #set wordpress database name
     WPDB="wp_$DOMAINUSER"
     # create database for wordpress
