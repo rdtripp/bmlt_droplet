@@ -30,17 +30,13 @@ read -p "Enter password for Virtual Server:   "  PASSWD
 echo
 echo
 IPCHECK=$(dig +short $DOMAIN);
-echo
-echo
 if [[ $IPCHECK != $PUBIP ]]; then
         echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
 echo "$DOMAIN  dns set up correctly";
-echo
-echo
+
 IPCHECKWWW=$(dig +short www.$DOMAIN);
-echo
 echo
 echo
 WWW=1
@@ -404,7 +400,7 @@ echo
 echo
 
 echo "A reboot is required"
-read -p "Do you want to reboot now? y or n n     "    REBOOT
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
 if [ "$REBOOT" = "y" ]; then
     halt --reboot
 fi    
