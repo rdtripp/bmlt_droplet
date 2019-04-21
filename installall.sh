@@ -351,23 +351,19 @@ echo
 echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
 
 echo
-echo
 
 echo "The sudo user is $ADMINUSER with the password $ADMINPASS"
 
 echo
-echo
 
 echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
 
-echo
 echo
 
 if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
 
-echo
 echo
 
 if [ "$INSTALLYAP" = "y" ]; then
@@ -386,11 +382,8 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo "Make note of the following info to set up the BMLT root server:"
     echo
     echo "BMLT database: $BMLTDB"
-    echo
     echo "BMLT database user: $DOMAINUSER"
     echo "BMLT database password:  $PASSWD"
-    echo
-    echo
     echo "Google Maps API:  $GMAPAPI"
     echo
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
