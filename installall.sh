@@ -12,18 +12,11 @@ PUBIP=$(curl ipinfo.io/ip)
 DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 VIRTHOST=$(hostname -f)
-
-echo $VIRTHOSTDNS
-echo $VIRTHOST
-
-
 if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
         echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
         exit
 fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
-
-echo
 echo
 read -p "Enter FQDN for Virtual Server:   "  DOMAIN
 read -p "Enter password for Virtual Server:   "  PASSWD
@@ -73,8 +66,40 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     done
 fi
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
-read -p "Enter a name for a sudo user:   "  ADMINUSER
-read -p "Enter a password for a sudo user: "  ADMINPASS
+while :
+do
+        echo "Enter a name for a sudo user:"
+        read ADMINUSER
+        if [$ADMINUSER = ""]
+
+        then
+        echo "You have not entered a user name."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
+while :
+do
+        echo "Enter a password for the sudo user:"
+        read ADMINPASS
+        if [$ADMINPASS = ""]
+
+        then
+        echo "You have not entered a password."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
