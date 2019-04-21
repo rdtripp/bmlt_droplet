@@ -103,7 +103,7 @@ while :
 do
         echo "Enter a name for a sudo user:"
         read ADMINUSER
-        if [ $ADMINUSER = "" ]
+        if [$ADMINUSER = ""]
 
         then
         echo "You have not entered a user name."
@@ -120,7 +120,7 @@ while :
 do
         echo "Enter a password for the sudo user:"
         read ADMINPASS
-        if [ $ADMINPASS = "" ]
+        if [$ADMINPASS = ""]
 
         then
         echo "You have not entered a password."
@@ -222,7 +222,7 @@ if [ "$INSTALLWP" = "y" ]; then
         do
             echo "Enter a name for the WordPress Admin user:"
             read WPADMIN
-            if [ $WPADMIN = "" ]
+            if [$WPADMIN = ""]
 
             then
             echo "You have not entered a user name."
@@ -239,7 +239,7 @@ if [ "$INSTALLWP" = "y" ]; then
         do
             echo "Enter a password for the WordPress Admin user:"
             read WPADMINPASS
-           if [ $WPADMINPASS = "" ]
+           if [$WPADMINPASS = ""]
 
             then
             echo "You have not entered a password."
@@ -256,7 +256,7 @@ while :
     do
             echo "Enter a name for the WordPress site:"
             read WPSITENAME
-            if [ $WPSITENAME = "" ]
+            if [$WPSITENAME = ""]
 
             then
             echo "You have not entered a valid site name."
