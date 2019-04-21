@@ -221,8 +221,8 @@ if [ "$INSTALLWP" = "y" ]; then
     while :
         do
             echo "Enter a name for the WordPress Admin user:"
-            read WPAD
-            if [$WPAD = ""]
+            read WPADMIN
+            if [$WPADMIN = ""]
 
             then
             echo "You have not entered a user name."
