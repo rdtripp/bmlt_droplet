@@ -18,8 +18,41 @@ if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
 fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
 echo
-read -p "Enter FQDN for Virtual Server:   "  DOMAIN
-read -p "Enter password for Virtual Server:   "  PASSWD
+
+while :
+do
+        echo "Enter FQDN for Virtual Server:"
+        read DOMAIN
+        if [$DOMAIN = ""]
+
+        then
+        echo "You have not entered a domain name."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
+while :
+do
+        echo "Enter a password for the $DOMAIN user:"
+        read PASSWD
+        if [$PASSWD = ""]
+
+        then
+        echo "You have not entered a password."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
 echo
 echo
 IPCHECK=$(dig +short $DOMAIN);
