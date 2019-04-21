@@ -23,9 +23,7 @@ while :
 do
         echo "Enter FQDN for Virtual Server:"
         read DOMAIN
-        if [$DOMAIN = ""]
-
-        then
+        if [$DOMAIN = ""]; then
         echo "You have not entered a domain name."
         echo "Please try again."
         continue
