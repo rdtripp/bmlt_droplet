@@ -96,44 +96,7 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     esac
     done
 fi
-echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
-while :
-do
-        echo "Enter a name for the sudo user:"
-        read ADMINUSER
-        if [[ $ADMINUSER = "" ]]
 
-        then
-        echo "You have not entered a USER name."
-        echo "Please try again."
-        continue
-
-        else
-        break
-
-        fi
-done
-
-while :
-do
-        echo "Enter a password for the sudo user:"
-        read ADMINPASS
-        if [[ $ADMINPASS = "" ]]
-
-        then
-        echo "You have not entered a password."
-        echo "Please try again."
-        continue
-
-        else
-        break
-
-        fi
-done
-
-useradd $ADMINUSER -m -p $ADMINPASS
-usermod -aG sudo $ADMINUSER
-su
 echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y upgrade
