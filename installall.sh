@@ -133,7 +133,7 @@ done
 
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
-
+su
 echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y upgrade
