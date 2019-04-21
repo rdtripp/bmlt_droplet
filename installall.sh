@@ -402,7 +402,43 @@ if [ "$INSTALLBMLT" = "y" ]; then
     chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/main_server
     rm *zip
 fi
+echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
+while :
+do
+        echo "Enter a name for the sudo user:"
+        read ADMINUSER
+        if [[ $ADMINUSER = "" ]]
 
+        then
+        echo "You have not entered a USER name."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
+while :
+do
+        echo "Enter a password for the sudo user:"
+        read ADMINPASS
+        if [[ $ADMINPASS = "" ]]
+
+        then
+        echo "You have not entered a password."
+        echo "Please try again."
+        continue
+
+        else
+        break
+
+        fi
+done
+
+useradd $ADMINUSER -m -p $ADMINPASS
+usermod -aG sudo $ADMINUSER
 mkdir /home/$ADMINUSER/src
 cp -R /root/bmlt_ubuntu_virtualmin/ /home/$ADMINUSER/src/
 chown -R  $ADMINUSER:$ADMINUSER /home/$ADMINUSER/src/
