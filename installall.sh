@@ -101,12 +101,12 @@ fi
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 while :
 do
-        echo "Enter a name for a sudo user:"
+        echo "Enter a name for the sudo user:"
         read ADMINUSER
         if [$ADMINUSER = ""]
 
         then
-        echo "You have not entered a user name."
+        echo "You have not entered a USER name."
         echo "Please try again."
         continue
 
