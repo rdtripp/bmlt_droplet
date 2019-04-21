@@ -254,7 +254,7 @@ while :
     do
             echo "Enter a name for the WordPress site:"
             read WPSITENAME
-            if [$WPSITENAME = ""]
+            if [[ $WPSITENAME = "" ]]
 
             then
             echo "You have not entered a valid site name."
