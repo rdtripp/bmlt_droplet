@@ -1,4 +1,4 @@
-bmlt_ubuntu_virtualmin
+bmlt_droplet
 
 Description:
 
