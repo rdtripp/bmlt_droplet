@@ -1,5 +1,16 @@
 bmlt_ubuntu_virtualmin
 
+Description:
+
+This project deploys an Ubuntun 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
+
+1. WordPress single site installation
+
+2. Convert Wordpress install to multisite
+
+3.  BMLT root setver
+
+4.  YAP
 
 Prerequisites:
 
@@ -104,10 +115,10 @@ Install a BMLT Root Server? Select 1 or 2
 #? 
 
 
-The virtual Server epig.us has user epig with password tmwamlgmimr 
+The virtual Server https://<your droplet FQDN> has user  with password 
 
 
-The sudo user is richard with the password max15n06 
+The sudo user is <sudo user selected at setup>with the password <sudo password selected at setup> 
 
 
 To access virtualmin go to https://<your droplet FQDN>:10000 and log in as root or <your sudo user> 
