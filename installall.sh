@@ -20,7 +20,7 @@ fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
 echo
 
-#Verify Virtual server has bdns set up correctly
+#Verify Virtual server has dns set up correctly
 
 while :
 do
@@ -355,6 +355,43 @@ if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate
     sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate
 fi
+echo
+echo
+ echo "Do you want to kinstall a BMLT Root Server? Select 1 or 2"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLBMLT=y;break;;
+        No ) INSTALLBMLT=n;break;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+done
+if [ "$INSTALLBMLT" = "y" ]; then
+    read -p "Enter your Google Maps API key:   "  GMAPAPI   
+    echo "BMLT Root Server Install"
+    #BMLT Root Server Installation
+    echo "Creating database"
+    #Set database name
+    BMLTDB="bmlt_$DOMAINUSER"
+    #Create database
+    virtualmin create-database --domain $DOMAIN --name $BMLTDB --type mysql
+    echo "Downloading and Preparing files"
+    #downlaoad latest stable version of BMLT Root Server
+    curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
+    unzip ./bmlt-root-server.zip -d /home/"$DOMAINUSER"/public_html/
+    cat ./htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
+    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/main_server
+    rm *zip
+fi 
+if [ "$INSTALLBMLT" = "y" ]; then
+    echo "Make note of the following info to set up the BMLT root server:"
+    echo
+    echo "BMLT database: $BMLTDB"
+    echo "BMLT database user: $DOMAINUSER"
+    echo "BMLT database password:  $PASSWD"
+    echo "Google Maps API:  $GMAPAPI"
+    echo
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+fi
  echo "Install Yap?  Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
@@ -421,34 +458,6 @@ fi
 echo
 echo
 echo
- echo "Install a BMLT Root Server? Select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLBMLT=y;break;;
-        No ) INSTALLBMLT=n;break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac
-done
-if [ "$INSTALLBMLT" = "y" ]; then
-    if [ "$INSTALLYAP" != "y" ]; then
-        read -p "Enter your Google Maps API key:   "  GMAPAPI
-     fi    
-    echo "BMLT Root Server Install"
-    #BMLT Root Server Installation
-    echo "Creating database"
-    #Set database name
-    BMLTDB="bmlt_$DOMAINUSER"
-    #Create database
-    virtualmin create-database --domain $DOMAIN --name $BMLTDB --type mysql
-    echo "Downloading and Preparing files"
-    #downlaoad latest stable version of BMLT Root Server
-    curl -s https://api.github.com/repos/bmlt-enabled/bmlt-root-server/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i -
-    unzip ./bmlt-root-server.zip -d /home/"$DOMAINUSER"/public_html/
-    cat ./htaccess_main_server >  /home/"$DOMAINUSER"/public_html/main_server/.htaccess
-    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/main_server
-    rm *zip
-fi
-
 clear
 echo  "Please make a copy of the following information:"
 

@@ -4,6 +4,8 @@ Description:
 
 This project deploys an Ubuntun 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
 
+1.  Install letsencrypt certificates
+
 1. WordPress single site installation
 
 2. Convert Wordpress install to multisite
@@ -27,7 +29,7 @@ Install Procedure:
 Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one, you can upgrade later as needed) named (for example) vhost.yourdomain.org
 You will get a temp password and the fixed ip address emailed to you.
 
-Edit your dns records for vhost.yourdomain.org (for example) and yourdomain.org, www.yourdomain.org (You can use something.yourdomain.org www.something.yourdomain.org ...... etc instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
+Edit your dns records for vhost.yourdomain.org (for example) and yourdomain.org, www.yourdomain.org (You can use something.yourdomain.org instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
 
 When dns updates, log in via terminal: ssh root@vhost.yourdomain.org and change the password
 power off the server: halt --poweroff
@@ -40,7 +42,7 @@ Double check that you have correct dns resolution for both the droplet (host) an
 
 Paste in the following command and into the terminal and press enter:
 
-git clone https://github.com/rdtripp/bmlt_ubuntu_virtualmin.git; cd bmlt_ubuntu_virtualmin; chmod +x ./installall.sh; ./installall.sh
+git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x ./installall.sh; ./installall.sh
 
 Be prepared to answer the questions it asks:
 
@@ -93,6 +95,13 @@ Enable WordPress Multisite? Select 1 or 2
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
 
+Install a BMLT Root Server? Select 1 or 2 
+1) Yes 
+2) No 
+#? 
+………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
+Enter your Google Maps API key:
+………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
 Install Yap?  Select 1 or 2 
 1) Yes 
 2) No 
@@ -108,12 +117,6 @@ Enter your BMLT root server user name:
 Enter your BMLT root server password:
 
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
-
-Install a BMLT Root Server? Select 1 or 2 
-1) Yes 
-2) No 
-#? 
-
 
 The virtual Server https://<your droplet FQDN> has user  with password 
 
