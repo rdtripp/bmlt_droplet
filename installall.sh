@@ -382,6 +382,16 @@ if [ "$INSTALLBMLT" = "y" ]; then
     chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/main_server
     rm *zip
 fi 
+if [ "$INSTALLBMLT" = "y" ]; then
+    echo "Make note of the following info to set up the BMLT root server:"
+    echo
+    echo "BMLT database: $BMLTDB"
+    echo "BMLT database user: $DOMAINUSER"
+    echo "BMLT database password:  $PASSWD"
+    echo "Google Maps API:  $GMAPAPI"
+    echo
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+fi
  echo "Install Yap?  Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
