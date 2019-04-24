@@ -36,7 +36,7 @@ Take a snapshot so you can revert back if you need to without having to redo dns
 
 Power the server back up and log back in via ssh via terminal.
 
-Double check that you have correct dns resolution for both the droplet (host) and the virtual server.
+Double check that you have correct dns resolution for both the droplet (host) and the virtual server or THE INSTALL WILL FAIL.
 
 Paste in the following command and into the terminal and press enter:
 
