@@ -4,6 +4,8 @@ Description:
 
 This project deploys an Ubuntun 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
 
+1.  Install letsencrypt certificates
+
 1. WordPress single site installation
 
 2. Convert Wordpress install to multisite
@@ -93,6 +95,13 @@ Enable WordPress Multisite? Select 1 or 2
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
 
+Install a BMLT Root Server? Select 1 or 2 
+1) Yes 
+2) No 
+#? 
+………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
+Enter your Google Maps API key:
+………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
 Install Yap?  Select 1 or 2 
 1) Yes 
 2) No 
@@ -108,12 +117,6 @@ Enter your BMLT root server user name:
 Enter your BMLT root server password:
 
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
-
-Install a BMLT Root Server? Select 1 or 2 
-1) Yes 
-2) No 
-#? 
-
 
 The virtual Server https://<your droplet FQDN> has user  with password 
 
