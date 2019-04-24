@@ -9,7 +9,7 @@ apt update && apt -y install bind9-host curl dnsutils
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
-
+#Verify droplet has dns set up correctly
 DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 VIRTHOST=$(hostname -f)
@@ -19,6 +19,8 @@ if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
 fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
 echo
+
+#Verify Virtual server has bdns set up correctly
 
 while :
 do
@@ -61,6 +63,7 @@ if [[ $IPCHECK != $PUBIP ]]; then
 fi
 echo "$DOMAIN  dns set up correctly";
 
+#Check for www, in dns
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
 echo
@@ -80,6 +83,8 @@ if [[ $IPCHECKWWW != $PUBIP ]]; then
 fi
 echo
 echo
+
+#check fo mail in dns
 IPCHECKMAIL=$(dig +short mail.$DOMAIN)
 echo
 echo
@@ -97,6 +102,8 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     esac
     done
 fi
+
+#Add admin "sudo"user
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 while :
 do
@@ -138,6 +145,7 @@ echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y upgrade
 
+#make a sawp file
 echo "configuring swap file"
 #Configure swap file
 dd if=/dev/zero of=/swapfile bs=2048 count=2097152
@@ -147,6 +155,7 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
+#Start LAMP install
 echo "Gathering Required Information for LAMP install"
 echo
 echo
