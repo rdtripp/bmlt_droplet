@@ -20,7 +20,7 @@ fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
 echo
 
-#Verify Virtual server has bdns set up correctly
+#Verify Virtual server has dns set up correctly
 
 while :
 do
