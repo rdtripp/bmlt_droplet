@@ -29,7 +29,7 @@ Install Procedure:
 Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one, you can upgrade later as needed) named (for example) vhost.yourdomain.org
 You will get a temp password and the fixed ip address emailed to you.
 
-Edit your dns records for vhost.yourdomain.org (for example) and yourdomain.org, www.yourdomain.org (You can use something.yourdomain.org www.something.yourdomain.org ...... etc instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
+Edit your dns records for vhost.yourdomain.org (for example) and yourdomain.org, www.yourdomain.org (You can use something.yourdomain.org instead of yourdomain.org if it conflicts with an exisiting site) using the ip address of the droplet.
 
 When dns updates, log in via terminal: ssh root@vhost.yourdomain.org and change the password
 power off the server: halt --poweroff
