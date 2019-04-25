@@ -102,6 +102,14 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     esac
     done
 fi
+#make a swap file
+echo "configuring swap file"
+dd if=/dev/zero of=/swapfile bs=2048 count=2097152
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
 #Add admin "sudo"user
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
@@ -253,14 +261,6 @@ done
 
     read -p "Enter your BMLT root server password:   "  BMLTPASS
 fi
-#make a swap file
-echo "configuring swap file"
-dd if=/dev/zero of=/swapfile bs=2048 count=2097152
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
-echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
 #Start LAMP install
 echo "Gathering Required Information for LAMP install"
