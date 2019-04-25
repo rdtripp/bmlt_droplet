@@ -10,7 +10,7 @@ This project deploys an Ubuntun 18.04.2 droplet on Digital Ocean with Virtualmin
 
 2. Convert Wordpress install to multisite
 
-3.  BMLT root setver
+3.  BMLT root server
 
 4.  YAP
 
