@@ -225,7 +225,6 @@ while :
 
         fi
    done
-   fi
    
  #WordPress Multisite
  if [ "$INSTALLWP" = "y" ]; then
