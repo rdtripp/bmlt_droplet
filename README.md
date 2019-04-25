@@ -47,17 +47,23 @@ git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x
 Be prepared to answer the questions it asks:
 
 Enter FQDN for Virtual Server: 
+
 Enter password for Virtual Server:  
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
 
 Adding a sudo user.  Do NOT use your domain name or any portion of it! 
+
 Enter a name for a sudo user: 
+
 Enter a password for a sudo user: 
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
+
 Configuring tzdata
+
 select county and press enter
+
 select time zone and press enter
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
@@ -65,7 +71,9 @@ select time zone and press enter
 Select the version of Virtualmin you want to install 
 Virtualmin Minimal is adequate for this application and takes less resources 
 Only choose Virtualmin Full if you need the extra features and know what you are doing 
+
 Install Virtualmin Minimal or Full? select 1 or 2 
+
 1) Minimal 
 2) Full 
 #? 
@@ -85,7 +93,9 @@ Install WordPress? select 1 or 2
 #? 
 
 Enter Admin User for WordPress:
+
 Enter WordPress Admin User Password:
+
 Enter WordPress Default Site Name:
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
@@ -99,6 +109,7 @@ Enable WordPress Multisite? Select 1 or 2
 ………………………………………………………………………………………………………………………….
 
 Install a BMLT Root Server? Select 1 or 2 
+
 1) Yes 
 2) No 
 #? 
@@ -107,6 +118,7 @@ Enter your Google Maps API key:
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
 
 Install Yap?  Select 1 or 2 
+
 1) Yes 
 2) No 
 #? 
