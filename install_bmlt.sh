@@ -226,6 +226,17 @@ while :
    done
    fi
    
+ #WordPress Multisite
+ if [ "$INSTALLWP" = "y" ]; then
+     echo "Enable WordPress Multisite? Select 1 or 2"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLWPMS=y;break;;
+        No ) INSTALLWPMS=n;break;;
+        *) echo "you have made an invalid entry,please select option 1 or 2";;
+    esac
+done
+   
 echo "Do you want to install a BMLT Root Server? Select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
