@@ -6,13 +6,18 @@ chown root:root /tmp
 chmod ugo+rwXt /tmp
 
 #Get public ip address of droplet
+echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 echo
 echo
 #Verify droplet has dns set up correctly
+#Getting Reverse DNS from Public IP Address
 DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
+#Removing "." 
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
+#Get full hostname from Droplet
 VIRTHOST=$(hostname -f)
+#Compare full hostname to reverse dns 
 if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
         echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
         exit
@@ -20,8 +25,8 @@ fi
 echo "dns for virtual host $(hostname -f) is set up correctly"
 echo
 
-#Verify Virtual server has dns set up correctly
 
+#Input Virtual Server info
 while :
 do
         echo "Enter FQDN for Virtual Server:"
@@ -54,6 +59,7 @@ do
         fi
 done
 
+#Verify Virtual server has dns set up correctly
 echo
 echo
 IPCHECK=$(dig +short $DOMAIN);
@@ -114,7 +120,7 @@ echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 clear
 #Add admin "sudo"user
-echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
+echo " Add a sudo user.  Do NOT use your domain name or any portion of it!"
 while :
 do
         echo "Enter a name for the sudo user:"
@@ -149,6 +155,7 @@ do
         fi
 done
 
+echo "configuring sudo user
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
