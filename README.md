@@ -42,7 +42,7 @@ Double check that you have correct dns resolution for both the droplet (host) an
 
 Paste in the following command and into the terminal and press enter:
 
-git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x ./installall.sh; ./installall.sh
+git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
 
 Be prepared to answer the questions it asks:
 
