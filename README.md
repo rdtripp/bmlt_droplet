@@ -50,6 +50,7 @@ Enter FQDN for Virtual Server:
 Enter password for Virtual Server:  
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
+
 Adding a sudo user.  Do NOT use your domain name or any portion of it! 
 Enter a name for a sudo user: 
 Enter a password for a sudo user: 
@@ -60,6 +61,7 @@ select county and press enter
 select time zone and press enter
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
+
 Select the version of Virtualmin you want to install 
 Virtualmin Minimal is adequate for this application and takes less resources 
 Only choose Virtualmin Full if you need the extra features and know what you are doing 
