@@ -151,10 +151,6 @@ done
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
-echo "Checking for updates on base system"
-#Updates base system
-apt-get update && apt-get -y upgrade
-
 #Set correct time zone
 dpkg-reconfigure tzdata
 
