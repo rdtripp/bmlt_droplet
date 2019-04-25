@@ -101,6 +101,7 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     esac
     done
 fi
+
 #make a swap file
 echo "configuring swap file"
 dd if=/dev/zero of=/swapfile bs=2048 count=2097152
@@ -110,6 +111,7 @@ swapon /swapfile
 echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
 echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
+clear
 #Add admin "sudo"user
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 while :
