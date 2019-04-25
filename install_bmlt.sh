@@ -3,7 +3,6 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
-apt update && apt -y install bind9-host curl dnsutils
 
 #Get public ip address of droplet
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
