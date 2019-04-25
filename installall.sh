@@ -190,8 +190,8 @@ if [ "$INSTALLWP" = "y" ]; then
 
             else
             break
-
-        fi
+            fi
+           
     done
 
     while :
@@ -208,7 +208,7 @@ if [ "$INSTALLWP" = "y" ]; then
             else
             break
 
-          fi
+         fi
     done
 
 while :
@@ -227,6 +227,7 @@ while :
 
         fi
    done
+   fi
    
 echo "Do you want to install a BMLT Root Server? Select 1 or 2"
 select yn in "Yes" "No"; do
