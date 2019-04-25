@@ -265,7 +265,7 @@ select yn in "Yes" "No"; do
 done
     
  if [ "$INSTALLYAP" = "y" ]; then   
-    read -p "Enter Phone Greeting:   "  TITLE
+    read -p "Enter Phone Greeting: (title in config.php)  "  TITLE
 
     read -p "Enter your BMLT root server:   "  ROOTSVR
 
