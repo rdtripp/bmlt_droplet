@@ -69,6 +69,7 @@ Install Virtualmin Minimal or Full? select 1 or 2
 #? 
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
+
 Install certificate from Letsencrypt? select 1 or 2 
 1) Yes 
 2) No 
@@ -102,11 +103,13 @@ Install a BMLT Root Server? Select 1 or 2
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
 Enter your Google Maps API key:
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
+
 Install Yap?  Select 1 or 2 
 1) Yes 
 2) No 
 #? 
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
+
 Configuring YAP 
 Enter Phone Greeting (title in config.php):
 Enter your BMLT root server:
