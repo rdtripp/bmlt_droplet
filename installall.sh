@@ -3,7 +3,6 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
-apt update && apt -y install bind9-host curl dnsutils
 
 #Get public ip address of droplet
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
@@ -103,6 +102,16 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
     done
 fi
 
+#make a sawp file
+echo "configuring swap file"
+#Configure swap file
+dd if=/dev/zero of=/swapfile bs=2048 count=2097152
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+echo "vm.swappiness=10" >> /etc/sysctl.conf 
+
 #Add admin "sudo"user
 echo " Adding a sudo user.  Do NOT use your domain name or any portion of it!"
 while :
@@ -144,16 +153,6 @@ usermod -aG sudo $ADMINUSER
 echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y upgrade
-
-#make a sawp file
-echo "configuring swap file"
-#Configure swap file
-dd if=/dev/zero of=/swapfile bs=2048 count=2097152
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
-echo "vm.swappiness=10" >> /etc/sysctl.conf 
 
 #Start LAMP install
 echo "Gathering Required Information for LAMP install"
