@@ -90,7 +90,7 @@ fi
 echo
 echo
 
-#check fo mail in dns
+#check for mail.$DOMAIN in dns
 IPCHECKMAIL=$(dig +short mail.$DOMAIN)
 echo
 echo
@@ -111,7 +111,7 @@ fi
 
 #make a swap file
 echo "configuring swap file"
-dd if=/dev/zero of=/swapfile bs=2048 count=2097152
+dd if=/dev/zero of=/swapfile bs=1k count=2048k
 chmod 600 /swapfile
 mkswap /swapfile
 swapon /swapfile
@@ -265,7 +265,7 @@ select yn in "Yes" "No"; do
 done
     
  if [ "$INSTALLYAP" = "y" ]; then   
-    read -p "Enter Phone Greeting: (title in config.php)  "  TITLE
+    read -p "Enter Phone Greeting, "title" in config.php:  "  TITLE
 
     read -p "Enter your BMLT root server:   "  ROOTSVR
 
