@@ -225,6 +225,7 @@ while :
 
         fi
    done
+   fi
    
  #WordPress Multisite
  if [ "$INSTALLWP" = "y" ]; then
@@ -236,6 +237,7 @@ select yn in "Yes" "No"; do
         *) echo "you have made an invalid entry,please select option 1 or 2";;
     esac
 done
+   fi
    
 echo "Do you want to install a BMLT Root Server? Select 1 or 2"
 select yn in "Yes" "No"; do
