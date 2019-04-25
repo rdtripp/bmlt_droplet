@@ -141,57 +141,14 @@ done
 
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
+
 echo "Checking for updates on base system"
 #Updates base system
 apt-get update && apt-get -y upgrade
 
-#make a sawp file
-echo "configuring swap file"
-#Configure swap file
-dd if=/dev/zero of=/swapfile bs=2048 count=2097152
-chmod 600 /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
-echo "vm.swappiness=10" >> /etc/sysctl.conf 
-
-#Start LAMP install
-echo "Gathering Required Information for LAMP install"
-echo
-echo
 #Set correct time zone
 dpkg-reconfigure tzdata
-echo "Starting Virtualmin Installation"
-#Starts Virtualmin install
-#Downloads Virtualmin install script
-wget http://software.virtualmin.com/gpl/scripts/install.sh
-echo "Select the version of Virtualmin you want to install"
-echo "Virtualmin Minimal is adequate for this application and takes less resources"
-echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
-echo
-select version in "Minimal" "Full"; do
-    case $version in   
-        Minimal ) sh ./install.sh -f -v -m;break;;
-        Full ) sh ./install.sh -f -v;break;;
-        *) echo "Error select option 1 or 2";;
-    esac
-done
-#End Virtualmin Install
 
-echo "Creating virtual server"
-#Start virtual server install
-DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
-
-virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
-#End virtual domain install
-
-#Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
-
-echo
-echo
-echo
 echo "Install certificate from Letsencrypt? select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
@@ -200,22 +157,8 @@ select yn in "Yes" "No"; do
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
   done
-if [ "$INSTALLLE" = "y" ]; then
-echo "installing certificate from Letsencrypt"
-    if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" != "1" ] && [ "$MAIL" = "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" != "1" ] && [ "$MAIL" != "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2
-        fi
-fi
-#WordPress Install
+  
+  #WordPress Install
  echo "Install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
     case $yn in
@@ -224,6 +167,7 @@ select yn in "Yes" "No"; do
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
 done
+
 if [ "$INSTALLWP" = "y" ]; then
     while :
         do
@@ -275,16 +219,110 @@ while :
 
         fi
    done
+   
+echo "Do you want to install a BMLT Root Server? Select 1 or 2"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLBMLT=y;read -p "Enter your Google Maps API key:   "  GMAPAPI;break;;
+        No ) INSTALLBMLT=n;break;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+done
+
+echo "Install Yap?  Select 1 or 2"
+select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) INSTALLYAP=y;break;;
+        No ) INSTALLYAP=n;break;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+done
+    
+ if [ "$INSTALLYAP" = "y" ]; then   
+    read -p "Enter Phone Greeting:   "  TITLE
+
+    read -p "Enter your BMLT root server:   "  ROOTSVR
+
+    read -p "Enter your Google Maps API key:   "  GMAPAPI
+
+    read -p "Enter your twilio account sid:   "  TWILACCTSID
+
+    read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
+
+    read -p "Enter your BMLT root server user name:   "  BMLTUSR
+
+    read -p "Enter your BMLT root server password:   "  BMLTPASS
+fi
+#make a swap file
+echo "configuring swap file"
+dd if=/dev/zero of=/swapfile bs=2048 count=2097152
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+echo "vm.swappiness=10" >> /etc/sysctl.conf 
+
+#Start LAMP install
+echo "Gathering Required Information for LAMP install"
+echo
+echo
+echo "Starting Virtualmin Installation"
+#Starts Virtualmin install
+#Downloads Virtualmin install script
+wget http://software.virtualmin.com/gpl/scripts/install.sh
+echo "Select the version of Virtualmin you want to install"
+echo "Virtualmin Minimal is adequate for this application and takes less resources"
+echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
+echo
+select version in "Minimal" "Full"; do
+    case $version in   
+        Minimal ) sh ./install.sh -f -v -m;break;;
+        Full ) sh ./install.sh -f -v;break;;
+        *) echo "Error select option 1 or 2";;
+    esac
+done
+#End Virtualmin Install
+
+echo "Creating virtual server"
+#Start virtual server install
+DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
+
+virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
+#End virtual domain install
+
+#Add additional packages
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
+
+echo
+echo
+echo
+
+if [ "$INSTALLLE" = "y" ]; then
+echo "installing certificate from Letsencrypt"
+    if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
+        fi
+    if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
+        fi
+    if [ "$WWW" != "1" ] && [ "$MAIL" = "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
+        fi
+    if [ "$WWW" != "1" ] && [ "$MAIL" != "1" ]; then
+        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2
+        fi
+fi
+if [ "$INSTALLWP" = "y" ]; then
+    echo "Installing WordPress"
+    #Install WordPress
     #set wordpress database name
     WPDB="wp_$DOMAINUSER"
     # create database for wordpress
     echo "Creating WordPress database"
     virtualmin create-database --domain $DOMAIN --name $WPDB --type mysql
-
-    echo "Installing WordPress"
-    #Install WordPress
     virtualmin install-script --domain $DOMAIN --type wordpress --version latest --path / --db mysql $WPDB
-
+    
     echo "Configuring WordPress"
     #Configure mysql database access in wp-config.php
 
@@ -317,15 +355,7 @@ echo
 echo
 echo
 
-if [ "$INSTALLWP" = "y" ]; then
-     echo "Enable WordPress Multisite? Select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLWPMS=y;break;;
-        No ) INSTALLWPMS=n;break;;
-        *) echo "you have made an invalid entry,please select option 1 or 2";;
-    esac
-done
+
     if [ "$INSTALLWPMS" = "y" ]; then
         echo "Configuring WordPress as multisite"
         #Configure WordPress multisite
@@ -340,8 +370,7 @@ done
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network    
-     fi  
-fi
+     fi 
 
 echo
 echo
@@ -357,16 +386,8 @@ if [ "$INSTALLWPMS" != "y" ] && [ "$INSTALLWP" = "y" ]; then
 fi
 echo
 echo
- echo "Do you want to kinstall a BMLT Root Server? Select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLBMLT=y;break;;
-        No ) INSTALLBMLT=n;break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac
-done
-if [ "$INSTALLBMLT" = "y" ]; then
-    read -p "Enter your Google Maps API key:   "  GMAPAPI   
+
+if [ "$INSTALLBMLT" = "y" ]; then   
     echo "BMLT Root Server Install"
     #BMLT Root Server Installation
     echo "Creating database"
@@ -392,14 +413,7 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
- echo "Install Yap?  Select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLYAP=y;break;;
-        No ) INSTALLYAP=n;break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac
-done
+
 if [ "$INSTALLYAP" = "y" ]; then
     #Updates system to reflect new sources added by installs
     apt-get update && apt-get -y upgrade
@@ -421,25 +435,18 @@ if [ "$INSTALLYAP" = "y" ]; then
 
     echo "Configuring YAP"
     #Configure yap
-    read -p "Enter Phone Greeting:   "  TITLE
     sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your BMLT root server:   "  ROOTSVR
     sed -i -- 's+$bmlt_root_server = "";+$bmlt_root_server = "'$ROOTSVR'";+g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your Google Maps API key:   "  GMAPAPI
     sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your twilio account sid:   "  TWILACCTSID
     sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
     sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your BMLT root server user name:   "  BMLTUSR
     sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
-    read -p "Enter your BMLT root server password:   "  BMLTPASS
     sed -i -- 's/$bmlt_password = "";/$bmlt_password = "'$BMLTPASS'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
 
     sed -i -- 's/$mysql_hostname = "";/$mysql_hostname = "localhost";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
