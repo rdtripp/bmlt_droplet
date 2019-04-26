@@ -278,11 +278,8 @@ if [ "$INSTALLYAP" = "y" ]; then
     
 fi
 
-echo "Checking for swap file"
 
-SWAPCHECK=$(free -h | grep Swap)
 
-if [ "$SWAPCHECK" = "" ]; then
         #make a swap file
         echo "configuring swap file"
         dd if=/dev/zero of=/swapfile bs=1k count=2048k
@@ -291,10 +288,7 @@ if [ "$SWAPCHECK" = "" ]; then
         swapon /swapfile
         echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
         echo "vm.swappiness=10" >> /etc/sysctl.conf
-    else
-       echo "A swap file exists:"
-       echo $SWAPCHECK
-fi
+
 
 echo "Starting Virtualmin Installation"
 
@@ -302,9 +296,9 @@ echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
 if [ $VMINMIN = "y" ]; then
-        sh ./install.sh -f -v -m;break
+        sh ./install.sh -f -v -m;
     else
-        sh ./install.sh -f -v;break
+        sh ./install.sh -f -v;
 fi
 
 #End Virtualmin Install
