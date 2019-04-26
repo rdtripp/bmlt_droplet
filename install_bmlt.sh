@@ -301,9 +301,9 @@ echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
 if [ $VMINMIN = "y" ]; then
-        sh ./install.sh -f -v -m;break
+        sh ./install.sh -f -v -m
     else
-        sh ./install.sh -f -v;break
+        sh ./install.sh -f -v
 fi
 if [ $? -eq 0 ]
 then
