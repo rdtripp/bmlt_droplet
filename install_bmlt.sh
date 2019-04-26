@@ -51,8 +51,9 @@ echo "Checking dns records for Virtual server $DOMAIN"
 echo
 echo
 IPCHECK=$(dig +short $DOMAIN);
-if [[ $IPCHECK != $PUBIP ]]
-        echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again"; exit
+if [[ $IPCHECK != $PUBIP ]]; then
+        echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again"; 
+        exit
 fi
 
 echo "$DOMAIN  dns is set up correctly";
