@@ -257,12 +257,19 @@ echo "Do you want to install Yap?  Select 1 or 2"
    done
 if [ "$INSTALLYAP" = "y" ]; then   
     read -p "Enter Phone Greeting, "title" in config.php:  "  TITLE
+    
     read -p "Enter your BMLT root server:   "  ROOTSVR
+    
     read -p "Enter your Google Maps API key:   "  GMAPAPI
+    
     read -p "Enter your twilio account sid:   "  TWILACCTSID
+    
     read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
+    
     read -p "Enter your BMLT root server user name:   "  BMLTUSR
+    
     read -p "Enter your BMLT root server password:   "  BMLTPASS
+    
 fi
 
 echo "Checking for swap file"
