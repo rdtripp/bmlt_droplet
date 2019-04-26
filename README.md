@@ -168,13 +168,13 @@ Enter your BMLT root server password:
 
 ………………………………………………………………………………………………………………………..………………………………………………………………………………………………………………………….
 
-The virtual Server https://<your droplet FQDN> has user  with password 
+The virtual Server https://your droplet FQDN has user  with password 
 
 
 The sudo user is <sudo user selected at setup>with the password <sudo password selected at setup> 
 
 
-To access virtualmin go to https://<your droplet FQDN>:10000 and log in as root or <your sudo user> 
+To access virtualmin go to https://your droplet FQDN:10000 and log in as root or <your sudo user> 
 
 
 To access WordPress Admin go to https://<your virtual server FQDN>/wp-admin/ and log in using user <admin user selected at setup> and password <password selected at setup> 
@@ -184,7 +184,7 @@ Checking Yap configuration and initializing database
 
 {"status":true,"message":"Ready To Yap!","version":"3.1.0"} 
 
-To access Yap Admin Console go to https://<your virtual server FQDN>/yap/admin/ 
+To access Yap Admin Console go to https://your virtual server FQDN/yap/admin/ 
 
 
 Make note of the following info to set up the BMLT root server: 
@@ -197,7 +197,7 @@ BMLT database password:  <this will be the same as the virtual server user pass
 
 Google Maps API:  xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx 
 
-To set up your BMLT Root Server go to https://<virtual server FQDN>/main_server/ 
+To set up your BMLT Root Server go to https://virtual server FQDN/main_server/ 
 
 
 A reboot is required 
