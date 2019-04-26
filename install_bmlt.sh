@@ -115,41 +115,6 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
 fi
 
 clear
-#Add admin "sudo"user
-echo " Add a sudo user.  Do NOT use your domain name or any portion of it!"
-while :
-do
-        echo "Enter a name for the sudo user:"
-        read ADMINUSER
-            if [[ $ADMINUSER = "" ]]
-
-              then
-                echo "You have not entered a USER name."
-                echo "Please try again."
-                continue
-             else
-               break
-          fi
-done
-
-while :
-do
-        echo "Enter a password for the sudo user:"
-        read ADMINPASS
-        if [[ $ADMINPASS = "" ]]
-            then
-                echo "You have not entered a password."
-                echo "Please try again."
-                continue
-           else
-                break
-        fi
-done
-
-
-echo "configuring sudo user"
-useradd $ADMINUSER -m -p $ADMINPASS
-usermod -aG sudo $ADMINUSER
 
 #Set correct time zone
 dpkg-reconfigure tzdata
@@ -307,6 +272,9 @@ echo "Creating virtual server"
 #Start virtual server install
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual server install
+
+echo "Adding $DOMAINUSER to sudoers"
+usermod -aG sudo $DOMAINUSER
 
 #Add additional packages
 echo "Adding additional packages"
@@ -468,8 +436,6 @@ echo  "Please make a copy of the following information:"
 echo
 echo
 echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
-echo
-echo "The sudo user is $ADMINUSER with the password $ADMINPASS"
 echo
 echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
 echo
