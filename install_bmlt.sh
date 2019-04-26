@@ -1,4 +1,4 @@
-#!/bin/bash
+a#!/bin/bash
 clear
 echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
@@ -145,12 +145,25 @@ do
         fi
 done
 
+
 echo "configuring sudo user"
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
 #Set correct time zone
 dpkg-reconfigure tzdata
+
+echo "Virtualmin Minimal is adequate for this application and takes less resources"
+echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
+echo
+
+echo "Which version of Virtualmin you want to install? select 1 or 2"
+select yn in "Minimal" "Full"; do
+    case $yn in   
+        Minimal ) VMINMIN=y;break;;
+        Full ) break;;
+        *) echo "Error select option 1 or 2";;
+    esac
 
 echo "Install certificate from Letsencrypt? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -161,17 +174,8 @@ select yn in "Yes" "No"; do
     esac
   done  
 
-echo "Virtualmin Minimal is adequate for this application and takes less resources"
-echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
-echo
-echo "Which version of Virtualmin you want to install? select 1 or 2"
-select yn in "Minimal" "Full"; do
-    case $yn in   
-        Minimal ) VMINMIN=y;break;;
-        Full ) break;;
-        *) echo "Error select option 1 or 2";;
-    esac
 done
+
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -181,6 +185,7 @@ select yn in "Yes" "No"; do
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
 done
+
 if [ "$INSTALLWP" = "y" ]; then
     while :
         do
@@ -378,7 +383,8 @@ echo
         sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
         echo "configuring .htaccess for WordPress multisite"
         cat ./htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
-        echo "Installin WordPress Plugins"
+        
+        echo "Installing WordPress Plugins"
         #install WordPress Plugins
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
         sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
