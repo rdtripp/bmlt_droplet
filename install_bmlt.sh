@@ -245,6 +245,7 @@ echo "Do you want to install a BMLT Root Server? Select 1 or 2"
         No ) INSTALLBMLT=n;break;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
+  done  
 
 echo "Do you want to install Yap?  Select 1 or 2"
     select yn in "Yes" "No"; do
