@@ -301,18 +301,11 @@ echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
 
 if [ $VMINMIN = "y" ]; then
-        sh ./install.sh -f -v -m
+        sh ./install.sh -f -v -m;break
     else
-        sh ./install.sh -f -v
+        sh ./install.sh -f -v;break
 fi
-if [ $? -eq 0 ]
-then
-  echo "Virtualmin installed successfully"
-  exit 0
-else
-  echo "Virtualmin installation failed" >&2
-  exit 1
-fi
+
 #End Virtualmin Install
 
 echo "Creating virtual server"
