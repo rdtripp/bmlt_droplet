@@ -1,4 +1,4 @@
-a#!/bin/bash
+#!/bin/bash
 clear
 echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
