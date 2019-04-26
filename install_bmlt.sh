@@ -145,7 +145,7 @@ do
         fi
 done
 
-echo "configuring sudo user
+echo "configuring sudo user"
 useradd $ADMINUSER -m -p $ADMINPASS
 usermod -aG sudo $ADMINUSER
 
