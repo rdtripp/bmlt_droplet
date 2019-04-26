@@ -159,6 +159,7 @@ select yn in "Yes" "No"; do
         No ) break;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
+  done  
 
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
