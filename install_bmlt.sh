@@ -234,7 +234,8 @@ while :
         No ) INSTALLWPMS=n;break;;
         *) echo "you have made an invalid entry,please select option 1 or 2";;
     esac
-   fi
+   done
+  fi
    
 echo "Do you want to install a BMLT Root Server? Select 1 or 2"
     select yn in "Yes" "No"; do
@@ -251,7 +252,7 @@ echo "Do you want to install Yap?  Select 1 or 2"
         No ) INSTALLYAP=n;break;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
-    
+   done
 if [ "$INSTALLYAP" = "y" ]; then   
     read -p "Enter Phone Greeting, "title" in config.php:  "  TITLE
     read -p "Enter your BMLT root server:   "  ROOTSVR
