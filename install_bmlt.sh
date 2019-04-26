@@ -21,7 +21,7 @@ DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 
 echo "Getting full hostname from Droplet"
-VIRTHOST=$(hostname -f)-
+VIRTHOST=$(hostname -f)
 
 echo "Comparing full hostname to reverse dns" 
 if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
