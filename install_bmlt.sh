@@ -305,7 +305,14 @@ if [ $VMINMIN = "y" ]; then
     else
         sh ./install.sh -f -v;break
 fi
-
+if [ $? -eq 0 ]
+then
+  echo "Virtualmin installed successfully"
+  exit 0
+else
+  echo "Virtualmin installation failed" >&2
+  exit 1
+fi
 #End Virtualmin Install
 
 echo "Creating virtual server"
