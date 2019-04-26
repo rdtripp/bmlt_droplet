@@ -90,6 +90,7 @@ if [[ $IPCHECKWWW != $PUBIP ]]; then
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
+  done
 fi
 echo
 echo
