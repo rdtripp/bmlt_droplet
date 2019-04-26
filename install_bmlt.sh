@@ -170,7 +170,7 @@ select yn in "Minimal" "Full"; do
         Full ) break;;
         *) echo "Error select option 1 or 2";;
     esac
-
+done
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -179,7 +179,7 @@ select yn in "Yes" "No"; do
         No ) INSTALLWP=n;break;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
-
+done
 if [ "$INSTALLWP" = "y" ]; then
     while :
         do
