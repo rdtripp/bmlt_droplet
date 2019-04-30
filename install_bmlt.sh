@@ -53,12 +53,12 @@ for INDEX in {1..6}
 do
    IPCHECK=$(dig +short $DOMAIN);
    if [[ $IPCHECK != $PUBIP ]]; then
-        echo "$INDEX dns record for $DOMAIN is incorrect, trying again";sleep 5 
+        echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
        else
            break
        fi
    if [[ $INDEX = 6 ]]; then
-      echo "No dns record for $DOMAIN found reconciling to $PUBIP";exit
+      echo "No dns record for $DOMAIN found reconciling to $PUBIP, exiting";exit
       fi
 done
 
