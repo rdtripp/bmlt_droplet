@@ -57,7 +57,7 @@ do
        else
            break
        fi
-   if $INDEX=6; then
+   if [[ $INDEX = 6 ]]; then
       echo "No dns record for $DOMAIN found reconciling to $PUBIP";exit
       fi
 done
