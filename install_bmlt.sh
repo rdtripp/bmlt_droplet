@@ -49,12 +49,18 @@ done
 
 echo "Checking dns records for Virtual server $DOMAIN"
 echo
-echo
-IPCHECK=$(dig +short $DOMAIN);
-if [[ $IPCHECK != $PUBIP ]]; then
-        echo "dns for virtual server $DOMAIN is not set up correctly, please correct the problem and run the install script again"; 
-        exit
-fi
+for INDEX in {1..6}
+do
+   IPCHECK=$(dig +short $DOMAIN);
+   if [[ $IPCHECK != $PUBIP ]]; then
+        echo "$INDEX dns record for $DOMAIN is incorrect, trying again";sleep 5 
+       else
+           break
+       fi
+   if $INDEX=6; then
+      echo "No dns record for $DOMAIN found reconciling to $PUBIP";exit
+      fi
+done
 
 echo "$DOMAIN  dns is set up correctly";
 
