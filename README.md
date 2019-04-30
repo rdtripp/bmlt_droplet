@@ -61,16 +61,6 @@ select time zone and press enter
 
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
-Install certificate from Letsencrypt? select 1 or 2 
-
-1) Yes 
-
-2) No 
-
-#? 
-
-………………………………………………………………………………………………………………………..
-…………………………………………………………………………………………………………………………
 
 Select the version of Virtualmin you want to install 
 Virtualmin Minimal is adequate for this application and takes less resources 
@@ -87,6 +77,16 @@ Install Virtualmin Minimal or Full? select 1 or 2
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
 
+Install certificate from Letsencrypt? select 1 or 2 
+
+1) Yes 
+
+2) No 
+
+#? 
+
+………………………………………………………………………………………………………………………..
+…………………………………………………………………………………………………………………………
 
 Install WordPress? select 1 or 2 
 
