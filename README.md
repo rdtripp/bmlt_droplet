@@ -2,7 +2,7 @@ bmlt_droplet
 
 Description:
 
-This project deploys an Ubuntun 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
+This project deploys an Ubuntu 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
 
 1.  Install letsencrypt certificates
 
