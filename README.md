@@ -31,12 +31,12 @@ You will get a temp password and the fixed ip address emailed to you.
 
 Edit your dns records for vhost.yourdomain (for example) and yourdomain.org, www.yourdomain (You can use something.yourdomain instead of yourdomain if it conflicts with an exisiting site) using the ip address of the droplet.
 
-When dns updates, log in via terminal: ssh root@vhost.yourdomain.org and change the password
+When dns updates, log in via terminal: ssh root@vhost.yourdomain and change the password
 power off the server: halt --poweroff
 
 Take a snapshot so you can revert back if you need to without having to redo dns.
 
-Power the server back up and log back in via ssh via terminal.
+Power the server back up and log back in via ssh in terminal.
 
 Double check that you have correct dns resolution for both the droplet (host) and the virtual server or THE INSTALL WILL FAIL.
 
