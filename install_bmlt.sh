@@ -129,7 +129,7 @@ echo "Virtualmin Minimal is adequate for this application and takes less resourc
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo
 
-echo "Which version of Virtualmin you want to install? select 1 or 2"
+echo "Which version of Virtualmin do you want to install? select 1 or 2"
 select yn in "Minimal" "Full"; do
     case $yn in   
         Minimal ) VMINMIN=y;break;;
