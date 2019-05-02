@@ -5,6 +5,38 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
+#Input Virtual Server info
+while :
+do
+        echo "Enter FQDN for Virtual Server:"
+        read DOMAIN
+        if [[ $DOMAIN = "" ]]; then
+            echo "You have not entered a domain name."
+            echo "Please try again."-
+            continue
+        else
+            break
+
+        fi
+done
+
+DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
+
+echo "The user for domain $DOMAIN is user $DOMAINUSER"
+
+while :
+do
+        echo "Enter a password for user $DOMAINUSER:   "
+        read PASSWD
+           if [[ $PASSWD = "" ]]
+               then   
+                  echo "You have not entered a password."
+                  echo "Please try again."
+                  continue
+              else
+                  break
+         fi
+done
 echo "Enable Strict DNS Checking?  Select 1 or 2"
     select yn in "Yes" "No"; do
     case $yn in
@@ -38,94 +70,69 @@ if [[ $DNSCHECK = "y" ]]; then
             exit
     fi
     echo "The dns record for virtual host $(hostname -f) is set up correctly"
-fi
 
-#Input Virtual Server info
-while :
-do
-        echo "Enter FQDN for Virtual Server:"
-        read DOMAIN
-        if [[ $DOMAIN = "" ]]; then
-            echo "You have not entered a domain name."
-            echo "Please try again."-
-            continue
-        else
-            break
-
-        fi
-done
-
-DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
-
-echo "The user for domain $DOMAIN is user $DOMAINUSER"
-
-while :
-do
-        echo "Enter a password for user $DOMAINUSER:   "
-        read PASSWD
-           if [[ $PASSWD = "" ]]
-               then   
-                  echo "You have not entered a password."
-                  echo "Please try again."
-                  continue
-              else
-                  break
-         fi
-done
-
-echo "Checking dns records for Virtual server $DOMAIN"
-echo
-for INDEX in {1..6}
-do
-   IPCHECK=$(dig +short $DOMAIN);
-   if [[ $IPCHECK != $PUBIP ]]; then
-        echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
+    echo "Checking dns records for Virtual server $DOMAIN"
+    echo
+    for INDEX in {1..6}
+    do
+       IPCHECK=$(dig +short $DOMAIN);
+       if [[ $IPCHECK != $PUBIP ]]; then
+            echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
        else
            break
        fi
-   if [[ $INDEX = 6 ]]; then
-      echo "No dns record for $DOMAIN found reconciling to $PUBIP, exiting";exit
-      fi
-done
+       if [[ $INDEX = 6 ]]; then
+          echo "No dns record for $DOMAIN found reconciling to $PUBIP, exiting";exit
+          fi
+    done
 
-echo "$DOMAIN  dns is set up correctly";
+    echo "$DOMAIN  dns is set up correctly";
 
 
-echo "Checking dns records for www.$DOMAIN"
-IPCHECKWWW=$(dig +short www.$DOMAIN);
-echo
-echo 
-WWW=1
-if [[ $IPCHECKWWW != $PUBIP ]]; then
-        echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
-        echo;WWW=0
-        echo "do you want to continue? select 1 or 2"
-        select yn in "Yes" "No"; do
-    case $yn in  
-        Yes ) break;;
-        No ) exit;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac
-  done  
-fi
-echo
-echo
+    echo "Checking dns records for www.$DOMAIN"
+    IPCHECKWWW=$(dig +short www.$DOMAIN);
+    echo
+    echo 
+    WWW=1
+    if [[ $IPCHECKWWW != $PUBIP ]]; then
+            echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
+            echo;WWW=0
+            echo "do you want to continue? select 1 or 2"
+            select yn in "Yes" "No"; do
+        case $yn in  
+            Yes ) break;;
+            No ) exit;;
+            *) echo "you have made an invalid entry, please select option 1 or 2";;
+        esac
+      done  
+    i
+    echo
+    echo
 
-echo "Checking dns records for mail.$DOMAIN"
-IPCHECKMAIL=$(dig +short mail.$DOMAIN)
-echo
-echo
-MAIL=1
-if [[ $IPCHECKMAIL != $PUBIP ]]; then
-        echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
-        echo "do you want to continue? select 1 or 2";MAIL=0
-        select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) break;;
-        No ) exit;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-   esac
- done  
+    echo "Checking dns records for mail.$DOMAIN"
+    IPCHECKMAIL=$(dig +short mail.$DOMAIN)
+    echo
+    echo
+    MAIL=1
+    if [[ $IPCHECKMAIL != $PUBIP ]]; then
+            echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
+            echo "do you want to continue? select 1 or 2";MAIL=0
+            select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) break;;
+            No ) exit;;
+            *) echo "you have made an invalid entry, please select option 1 or 2";;
+       esac
+     done  
+    fi
+    echo "Install certificate from Letsencrypt? select 1 or 2"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) INSTALLLE=y;break;;
+            No ) break;;
+            *) echo "you have made an invalid entry, please select option 1 or 2";;
+        esac 
+    done  
 fi
 
 clear
@@ -144,15 +151,6 @@ select yn in "Minimal" "Full"; do
         *) echo "Error select option 1 or 2";;
     esac
 done
-
-echo "Install certificate from Letsencrypt? select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLLE=y;break;;
-        No ) break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac 
-done  
   
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
