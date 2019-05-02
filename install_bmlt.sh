@@ -249,9 +249,7 @@ if [ "$INSTALLYAP" = "y" ]; then
     read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
     
     read -p "Enter your BMLT root server user name:   "  BMLTUSR
-    #Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
+    
     read -p "Enter your BMLT root server password:   "  BMLTPASS
     
 fi
