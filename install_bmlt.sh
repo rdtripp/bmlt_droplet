@@ -200,8 +200,6 @@ while :
              then
                  echo "You have not entered a valid site name."
                  echo "Please try again."
-                 continueecho "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
              else
                  break
         fi
@@ -263,7 +261,6 @@ fi
         mkswap /swapfile
         swapon /swapfile
         echo "/swapfile swap swap defaults 0 0" >> /etc/fstabecho "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
         echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 
