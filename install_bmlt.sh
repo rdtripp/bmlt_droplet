@@ -277,9 +277,6 @@ if [ $VMINMIN = "y" ]; then
         sh ./install.sh -f -v;
 fi
 
-#End Virtualmin Installecho "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
-
 echo "Creating virtual server"
 #Start virtual server install
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
@@ -297,8 +294,7 @@ if [ "$INSTALLLE" = "y" ]; then
 echo "installing certificate from Letsencrypt"
     if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
         /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
-        fiecho "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
+        fi
     if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
         /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
         fi
