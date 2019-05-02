@@ -353,11 +353,11 @@ echo
         
         echo "Installing WordPress Plugins"
         #install WordPress Plugins
-        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
-        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
-        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
-        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
-        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network    
+        runuser "$DOMAINUSER" -c 'wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network'
+        runuser "$DOMAINUSER" -c 'wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network'
+        runuser "$DOMAINUSER" -c 'wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network'
+        runuser "$DOMAINUSER" -c 'wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network'
+        runuser "$DOMAINUSER" -c 'wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network'    
      fi 
 echo
 echo
