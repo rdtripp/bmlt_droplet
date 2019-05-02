@@ -164,10 +164,7 @@ Enter your BMLT root server password:
 The virtual Server https://your droplet FQDN has user  with password 
 
 
-The sudo user is <sudo user selected at setup>with the password <sudo password selected at setup> 
-
-
-To access virtualmin go to https://your droplet FQDN:10000 and log in as root or <your sudo user> 
+To access virtualmin go to https://your droplet FQDN:10000 and log in as root or virtual server user
 
 
 To access WordPress Admin go to https://<your virtual server FQDN>/wp-admin/ and log in using user <admin user selected at setup> and password <password selected at setup> 
