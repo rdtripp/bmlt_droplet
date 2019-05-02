@@ -9,7 +9,7 @@ echo "Enable Strict DNS Checking?  Select 1 or 2"
     select yn in "Yes" "No"; do
     case $yn in
         Yes ) DNSCHECK=y;break;;
-        No ) break;;
+        No ) echo "dns check disbled"; break;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
    done
@@ -82,8 +82,7 @@ do
         echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
-               then   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
+               then   
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
@@ -102,7 +101,7 @@ if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo;WWW=0
         echo "do you want to continue? select 1 or 2"
         select yn in "Yes" "No"; do
-    case $yn in   #Updates system to reflect new sources added by installs
+    case $yn in  
         Yes ) break;;
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
@@ -119,8 +118,6 @@ echo
 MAIL=1
 if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
-        echo   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
         echo "do you want to continue? select 1 or 2";MAIL=0
         select yn in "Yes" "No"; do
     case $yn in
