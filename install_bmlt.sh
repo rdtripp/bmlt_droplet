@@ -183,9 +183,7 @@ while :
          echo "Enter a password for the WordPress Admin user:"
          read WPADMINPASS
          if [[ $WPADMINPASS = "" ]]
-              then#Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
+              then
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
