@@ -53,7 +53,7 @@ echo
 for INDEX in {1..6}
 do
    IPCHECK=$(dig +short $DOMAIN);
-   if [[ $IPCHECK != $PUBIP ]]; then
+   if [[ $IPCHECK != $PUBIP ]]; t apt-get update && apt-get -y upgradehen
         echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
        else
            break
@@ -70,7 +70,7 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 echo "The user for domain $DOMAIN is user $DOMAINUSER"
 
 while :
-do
+do apt-get update && apt-get -y upgrade
         echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
@@ -87,7 +87,7 @@ done
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
-echo
+echo apt-get update && apt-get -y upgrade
 WWW=1
 if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
@@ -95,7 +95,6 @@ if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "do you want to continue? select 1 or 2"
         select yn in "Yes" "No"; do
     case $yn in   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
         Yes ) break;;
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
