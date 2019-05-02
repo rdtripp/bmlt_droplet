@@ -223,7 +223,7 @@ echo "Do you want to install a BMLT Root Server? Select 1 or 2"
     case $yn in
         Yes ) INSTALLBMLT=y;read -p "Enter your Google Maps API key:   "  GMAPAPI;break;;
         No ) INSTALLBMLT=n;break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
+        *) echo "you have made an invalid entry, please select option 1 or 2";--skip-warnings;
     esac
   done  
 
@@ -279,7 +279,7 @@ fi
 
 echo "Creating virtual server"
 #Start virtual server install
-virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
+virtualmin create-domain --domain $DOMAIN --skip-warnings --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual server install
 echo "Adding additional packages"
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
@@ -346,7 +346,7 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /home/"$DOMAINUSER"/etc/php.ini
     sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
-echo
+echo--skip-warnings
 echo
 echo
     if [ "$INSTALLWPMS" = "y" ]; then
