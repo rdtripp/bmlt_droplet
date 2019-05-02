@@ -4,9 +4,7 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
-#Updates system
-echo "Updating System files"
-apt-get update && apt-get -y upgrade
+
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
