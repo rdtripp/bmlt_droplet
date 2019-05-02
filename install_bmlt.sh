@@ -105,7 +105,7 @@ if [[ $DNSCHECK = "y" ]]; then
             *) echo "you have made an invalid entry, please select option 1 or 2";;
         esac
       done  
-    i
+    fi
     echo
     echo
 
