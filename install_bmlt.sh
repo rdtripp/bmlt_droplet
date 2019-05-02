@@ -4,17 +4,13 @@ echo "Starting Installation"
 #Fixes a bug that sets wrong permissions on /tmp 
 chown root:root /tmp
 chmod ugo+rwXt /tmp
-
-#Updates system to reflect new sources added by installs
+#Updates system
 echo "Updating System files"
 apt-get update && apt-get -y upgrade
-
-#Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host jq curl wget dnsutils net-tools
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
-PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
+PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 
 echo
 echo
@@ -124,7 +120,8 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "do you want to continue? select 1 or 2";MAIL=0
         select yn in "Yes" "No"; do
     case $yn in
-        Yes ) break;;
+        Yes ) break;;echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
    esac
@@ -155,7 +152,8 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLLE=y;break;;
         No ) break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
+        *) echo "you have made an invalid entry, please select option 1 or 2"echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc;;
     esac 
 done  
 
@@ -209,7 +207,8 @@ while :
              then
                  echo "You have not entered a valid site name."
                  echo "Please try again."
-                 continue
+                 continueecho "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
              else
                  break
         fi
@@ -272,7 +271,8 @@ fi
         chmod 600 /swapfile
         mkswap /swapfile
         swapon /swapfile
-        echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
+        echo "/swapfile swap swap defaults 0 0" >> /etc/fstabecho "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
         echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 
@@ -289,13 +289,15 @@ if [ $VMINMIN = "y" ]; then
         sh ./install.sh -f -v;
 fi
 
-#End Virtualmin Install
+#End Virtualmin Installecho "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 
 echo "Creating virtual server"
 #Start virtual server install
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual server install
-
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 echo "Adding $DOMAINUSER to sudoers"
 usermod -aG sudo $DOMAINUSER
 
@@ -307,7 +309,8 @@ if [ "$INSTALLLE" = "y" ]; then
 echo "installing certificate from Letsencrypt"
     if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
         /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
-        fi
+        fiecho "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
     if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
         /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
         fi
@@ -319,6 +322,8 @@ echo "installing certificate from Letsencrypt"
         fi
 fi
 
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 if [ "$INSTALLWP" = "y" ]; then
     echo "Installing WordPress"
     #Install WordPress
