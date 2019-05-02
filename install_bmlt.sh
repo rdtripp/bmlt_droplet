@@ -5,6 +5,15 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
+echo "Enable Strict DNS Checking?  Select 1 or 2"
+    select yn in "Yes" "No"; do
+    case $yn in
+        Yes ) DNSCHECK=y;break;;
+        No ) break;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
+    esac
+   done
+   
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
@@ -21,7 +30,6 @@ DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 
 echo "Getting full hostname from Droplet"   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
 VIRTHOST=$(hostname -f)
 
 echo "Comparing full hostname to reverse dns" 
@@ -70,12 +78,11 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 echo "The user for domain $DOMAIN is user $DOMAINUSER"
 
 while :
-do apt-get update && apt-get -y upgrade
-        echo "Enter a password for user $DOMAINUSER:   "
+do
+    echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
                then   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
@@ -87,7 +94,7 @@ done
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
-echo apt-get update && apt-get -y upgrade
+echo
 WWW=1
 if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
