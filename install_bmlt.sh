@@ -21,7 +21,6 @@ DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 
 echo "Getting full hostname from Droplet"   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
 VIRTHOST=$(hostname -f)
 
 echo "Comparing full hostname to reverse dns" 
@@ -70,7 +69,7 @@ DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 echo "The user for domain $DOMAIN is user $DOMAINUSER"
 
 while :
-do apt-get update && apt-get -y upgrade
+do
         echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
@@ -87,7 +86,7 @@ done
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
-echo apt-get update && apt-get -y upgrade
+echo 
 WWW=1
 if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
@@ -131,8 +130,6 @@ dpkg-reconfigure tzdata
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo
-   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
 echo "Which version of Virtualmin do you want to install? select 1 or 2"
 select yn in "Minimal" "Full"; do
     case $yn in   
@@ -147,11 +144,10 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLLE=y;break;;
         No ) break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2"echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac 
 done  
-
+  
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -308,6 +304,7 @@ fi
 
 echo "Adding additional packages"
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
+
 if [ "$INSTALLWP" = "y" ]; then
     echo "Installing WordPress"
     #Install WordPress
