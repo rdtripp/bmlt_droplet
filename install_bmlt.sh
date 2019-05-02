@@ -53,7 +53,7 @@ echo
 for INDEX in {1..6}
 do
    IPCHECK=$(dig +short $DOMAIN);
-   if [[ $IPCHECK != $PUBIP ]]; t apt-get update && apt-get -y upgradehen
+   if [[ $IPCHECK != $PUBIP ]]; then
         echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
        else
            break
