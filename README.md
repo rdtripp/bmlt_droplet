@@ -44,6 +44,9 @@ Paste in the following command and into the terminal and press enter:
 
 apt-get update && apt-get -y install git jq bind9-host jq curl wget dnsutils net-tools unzip; wget https://github.com/rdtripp/bmlt_droplet/archive/universal-alpha.zip; unzip *.zip; cd bmlt_droplet-universal-alpha; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
 
+yum install -y epel-release; yum -y update; yum -y install git jq curl wget net-tools unzip  bind-utils; wget https://github.com/rdtripp/bmlt_droplet/archive/universal-alpha.zip; unzip *.zip; cd bmlt_droplet-universal-alpha; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
+
+
 
 Be prepared to answer the questions it asks:
 
