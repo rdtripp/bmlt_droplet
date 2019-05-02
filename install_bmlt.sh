@@ -55,23 +55,6 @@ do
         fi
 done
 
-echo "Checking dns records for Virtual server $DOMAIN"
-echo
-for INDEX in {1..6}
-do
-   IPCHECK=$(dig +short $DOMAIN);
-   if [[ $IPCHECK != $PUBIP ]]; then
-        echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
-       else
-           break
-       fi
-   if [[ $INDEX = 6 ]]; then
-      echo "No dns record for $DOMAIN found reconciling to $PUBIP, exiting";exit
-      fi
-done
-
-echo "$DOMAIN  dns is set up correctly";
-
 DOMAINUSER=`echo "$DOMAIN" | cut -d'.' -f 1`
 
 echo "The user for domain $DOMAIN is user $DOMAINUSER"
@@ -89,6 +72,24 @@ do
                   break
          fi
 done
+
+echo "Checking dns records for Virtual server $DOMAIN"
+echo
+for INDEX in {1..6}
+do
+   IPCHECK=$(dig +short $DOMAIN);
+   if [[ $IPCHECK != $PUBIP ]]; then
+        echo "$INDEX No dns record for $DOMAIN found reconciling to $PUBIP, trying again";sleep 5 
+       else
+           break
+       fi
+   if [[ $INDEX = 6 ]]; then
+      echo "No dns record for $DOMAIN found reconciling to $PUBIP, exiting";exit
+      fi
+done
+
+echo "$DOMAIN  dns is set up correctly";
+
 
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
