@@ -63,7 +63,9 @@ select time zone and press enter
 ………………………………………………………………………………………………………………………….
 
 Select the version of Virtualmin you want to install 
+
 Virtualmin Minimal is adequate for this application and takes less resources 
+
 Only choose Virtualmin Full if you need the extra features and know what you are doing 
 
 Install Virtualmin Minimal or Full? select 1 or 2 
