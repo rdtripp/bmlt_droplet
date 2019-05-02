@@ -438,10 +438,4 @@ if [ "$INSTALLYAP" = "y" ]; then
     echo "Editing .htaccess for yap"
     sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 fi
-echo
-echo
-echo
-clear
-echo  "Please make a copy of the following information:"
-echo
-echo    echo "Downloading YAP & Preparing files"
+
