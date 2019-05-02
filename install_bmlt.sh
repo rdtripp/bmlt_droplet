@@ -5,6 +5,13 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
+#Updates system to reflect new sources added by installs
+echo "Updating System files"
+apt-get update && apt-get -y upgrade
+
+#Add additional packages
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host jq curl wget dnsutils net-tools
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
@@ -20,7 +27,8 @@ DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 #Removing "." 
 VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 
-echo "Getting full hostname from Droplet"
+echo "Getting full hostname from Droplet"   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
 VIRTHOST=$(hostname -f)
 
 echo "Comparing full hostname to reverse dns" 
@@ -73,7 +81,8 @@ do
         echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
-               then
+               then   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
@@ -92,7 +101,8 @@ if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo;WWW=0
         echo "do you want to continue? select 1 or 2"
         select yn in "Yes" "No"; do
-    case $yn in
+    case $yn in   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
         Yes ) break;;
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
@@ -109,7 +119,8 @@ echo
 MAIL=1
 if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "mail.$DOMAIN dns is not configured correctly. this is not essential";
-        echo
+        echo   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
         echo "do you want to continue? select 1 or 2";MAIL=0
         select yn in "Yes" "No"; do
     case $yn in
@@ -128,7 +139,8 @@ dpkg-reconfigure tzdata
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo
-
+   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
 echo "Which version of Virtualmin do you want to install? select 1 or 2"
 select yn in "Minimal" "Full"; do
     case $yn in   
@@ -178,7 +190,9 @@ while :
          echo "Enter a password for the WordPress Admin user:"
          read WPADMINPASS
          if [[ $WPADMINPASS = "" ]]
-              then
+              then#Add additional packages
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
@@ -243,7 +257,9 @@ if [ "$INSTALLYAP" = "y" ]; then
     read -p "Enter your twilio Auth Token:   " TWILAUTHTOK
     
     read -p "Enter your BMLT root server user name:   "  BMLTUSR
-    
+    #Add additional packages
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
     read -p "Enter your BMLT root server password:   "  BMLTPASS
     
 fi
@@ -260,7 +276,9 @@ fi
         echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 
-echo "Starting Virtualmin Installation"
+echo "Starting Virtualmin Installati#Add additional packages
+echo "Adding additional packages"
+apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-hoston"
 
 echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
@@ -280,10 +298,6 @@ virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --uni
 
 echo "Adding $DOMAINUSER to sudoers"
 usermod -aG sudo $DOMAINUSER
-
-#Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
 
 echo
 echo
@@ -399,9 +413,8 @@ if [ "$INSTALLBMLT" = "y" ]; then
     echo
     echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
 fi
+
 if [ "$INSTALLYAP" = "y" ]; then
-    #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
     echo "Starting Yap Installation"
     #set yap database name
     YAPDB="yap_$DOMAINUSER"
