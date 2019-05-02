@@ -13,33 +13,32 @@ echo "Enable Strict DNS Checking?  Select 1 or 2"
         *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac
    done
-   
-#Get public ip address of droplet
-echo "Getting public ip address of droplet"
-PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
+if [[ $DNSCHECK = "y" ]]; then   
+    #Get public ip address of droplet
+    echo "Getting public ip address of droplet"
+    PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
 
-echo
-echo
+    echo
+    echo
 
-echo "Verifying dns record for droplet"
+    echo "Verifying dns record for droplet"
 
-echo "Getting Reverse DNS from Public IP Address"
-DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
+    echo "Getting Reverse DNS from Public IP Address"
+    DNSHOSTLOOKUP=$(dig -x $PUBIP +short)
 
-#Removing "." 
-VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
+    #Removing "." 
+    VIRTHOSTDNS="${DNSHOSTLOOKUP::-1}"
 
-echo "Getting full hostname from Droplet"   #Updates system to reflect new sources added by installs
-VIRTHOST=$(hostname -f)
+    echo "Getting full hostname from Droplet"   #Updates system to reflect new sources added by installs
+    VIRTHOST=$(hostname -f)
 
-echo "Comparing full hostname to reverse dns" 
-if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
-        echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
-        exit
+    echo "Comparing full hostname to reverse dns" 
+    if [[ $VIRTHOSTDNS != $VIRTHOST ]]; then
+            echo "dns for virtual host $(hostname -f) is not set up correctly, please correct the problem and run the install script again";
+            exit
+    fi
+    echo "The dns record for virtual host $(hostname -f) is set up correctly"
 fi
-echo "The dns record for virtual host $(hostname -f) is set up correctly"
-echo
-
 
 #Input Virtual Server info
 while :
