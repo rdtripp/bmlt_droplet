@@ -116,8 +116,7 @@ if [[ $IPCHECKMAIL != $PUBIP ]]; then
         echo "do you want to continue? select 1 or 2";MAIL=0
         select yn in "Yes" "No"; do
     case $yn in
-        Yes ) break;;echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
+        Yes ) break;;
         No ) exit;;
         *) echo "you have made an invalid entry, please select option 1 or 2";;
    esac
