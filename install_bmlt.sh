@@ -8,7 +8,6 @@ chmod ugo+rwXt /tmp
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 
 echo
 echo
