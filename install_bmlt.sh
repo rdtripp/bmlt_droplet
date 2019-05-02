@@ -253,13 +253,11 @@ fi
         chmod 600 /swapfile
         mkswap /swapfile
         swapon /swapfile
-        echo "/swapfile swap swap defaults 0 0" >> /etc/fstabecho "Adding additional packages"
+        echo "/swapfile swap swap defaults 0 0" >> /etc/fstab
         echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 
-echo "Starting Virtualmin Installati#Add additional packages
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-hoston"
+echo "Starting Virtualmin Installation"
 
 echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
@@ -274,8 +272,6 @@ echo "Creating virtual server"
 #Start virtual server install
 virtualmin create-domain --domain $DOMAIN --pass $PASSWD --desc "BMLT DEV" --unix --dir --webmin  --web --ssl --mysql --dns --mail --limits-from-plan
 #End virtual server install
-echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
 echo "Adding $DOMAINUSER to sudoers"
 usermod -aG sudo $DOMAINUSER
 
