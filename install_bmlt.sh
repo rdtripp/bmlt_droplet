@@ -347,17 +347,17 @@ echo
     if [ "$INSTALLWPMS" = "y" ]; then
         echo "Configuring WordPress as multisite"
         #Configure WordPress multisite
-        sudo -u $DOMAINUSER wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
+        runuser "$DOMAINUSER" -c wp core multisite-install --path=/home/"$DOMAINUSER"/public_html/ --url=http://"$DOMAIN"/ --title="$WPSITENAME" --admin_user=$WPADMIN --admin_password=$WPADMINPASS --admin_email=$DOMAINUSER@$DOMAIN
         echo "configuring .htaccess for WordPress multisite"
         cat ./htaccess >  /home/"$DOMAINUSER"/public_html/.htaccess
         
         echo "Installing WordPress Plugins"
         #install WordPress Plugins
-        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
-        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
-        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
-        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
-        sudo -u "$DOMAINUSER" -i -- wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network    
+        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-wordpress-satellite-plugin --activate-network
+        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bread --activate-network
+        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install crouton --activate-network
+        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install bmlt-tabbed-map --activate-network
+        runuser "$DOMAINUSER" -c wp --path=/home/"$DOMAINUSER"/public_html/ plugin install wp-force-ssl --activate-network    
      fi 
 echo
 echo
