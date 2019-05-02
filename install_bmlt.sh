@@ -264,9 +264,9 @@ fi
         echo "vm.swappiness=10" >> /etc/sysctl.conf
 
 
-echo "Starting Virtualmin Installati#Add additional packages
+echo "Starting Virtualmin Installation"
 echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-hoston"
+#apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc jq bind9-host
 
 echo "Downloading Virtualmin install script"
 wget http://software.virtualmin.com/gpl/scripts/install.sh
