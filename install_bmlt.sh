@@ -342,7 +342,6 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /home/"$DOMAINUSER"/etc/php.ini
     sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
-echo--skip-warnings
 echo
 echo
     if [ "$INSTALLWPMS" = "y" ]; then
