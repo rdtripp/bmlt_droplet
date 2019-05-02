@@ -79,10 +79,11 @@ echo "The user for domain $DOMAIN is user $DOMAINUSER"
 
 while :
 do
-    echo "Enter a password for user $DOMAINUSER:   "
+        echo "Enter a password for user $DOMAINUSER:   "
         read PASSWD
            if [[ $PASSWD = "" ]]
                then   #Updates system to reflect new sources added by installs
+    apt-get update && apt-get -y upgrade
                   echo "You have not entered a password."
                   echo "Please try again."
                   continue
@@ -94,7 +95,7 @@ done
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
-echo
+echo 
 WWW=1
 if [[ $IPCHECKWWW != $PUBIP ]]; then
         echo "www.$DOMAIN dns is not configured correctly. this is recommended but not essential";
@@ -138,8 +139,6 @@ dpkg-reconfigure tzdata
 echo "Virtualmin Minimal is adequate for this application and takes less resources"
 echo "Only choose Virtualmin Full if you need the extra features and know what you are doing"
 echo
-   #Updates system to reflect new sources added by installs
-    apt-get update && apt-get -y upgrade
 echo "Which version of Virtualmin do you want to install? select 1 or 2"
 select yn in "Minimal" "Full"; do
     case $yn in   
@@ -154,11 +153,10 @@ select yn in "Yes" "No"; do
     case $yn in
         Yes ) INSTALLLE=y;break;;
         No ) break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2"echo "Adding additional packages"
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc;;
+        *) echo "you have made an invalid entry, please select option 1 or 2";;
     esac 
 done  
-
+  
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -315,6 +313,7 @@ fi
 
 echo "Adding additional packages"
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
+
 if [ "$INSTALLWP" = "y" ]; then
     echo "Installing WordPress"
     #Install WordPress
@@ -448,7 +447,403 @@ echo
 clear
 echo  "Please make a copy of the following information:"
 echo
+echo    echo "Downloading YAP & Preparing files"
+421
+    #Get YAP
+422
+    mkdir /home/"$DOMAINUSER"/public_html/yap
+423
+    #Download latest yap stable
+424
+    curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i - 
+425
+    unzip yap*.zip -d /home/"$DOMAINUSER"/public_html/yap/
+426
+    rm *.zip
+427
+    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
+428
+    echo "Configuring YAP"
+429
+    #Configure yap
+430
+    sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+431
+    sed -i -- 's+$bmlt_root_server = "";+$bmlt_root_server = "'$ROOTSVR'";+g' /home/"$DOMAINUSER"/public_html/yap/config.php
+432
+    sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+433
+    sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+434
+    sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+435
+    sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+436
+    sed -i -- 's/$bmlt_password = "";/$bmlt_password = "'$BMLTPASS'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+437
+    sed -i -- 's/$mysql_hostname = "";/$mysql_hostname = "localhost";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+438
+    sed -i -- 's/$mysql_username = "";/$mysql_username = "'$DOMAINUSER'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+439
+    sed -i -- 's/$mysql_password = "";/$mysql_password = "'$PASSWD'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+440
+    sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+441
+    #edit .htaccess so yap will run under virtualmin
+442
+    echo "Editing .htaccess for yap"
+443
+    sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+444
+fi
+445
 echo
+446
+echo
+447
+echo
+448
+clear
+449
+echo  "Please make a copy of the following information:"
+450
+echo
+451
+echo
+452
+echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
+453
+echo
+454
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
+455
+echo
+456
+if [ "$INSTALLWP" = "y" ]; then
+457
+    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
+458
+fi
+459
+echo
+460
+if [ "$INSTALLYAP" = "y" ]; then
+461
+    echo "Checking Yap configuration and initializing database";
+462
+    echo 
+463
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php;
+464
+    echo
+465
+    echo
+466
+    echo "To access Yap Admin Console go to https://$DOMAIN/yap/admin/";
+467
+fi
+468
+echo
+469
+echo
+470
+if [ "$INSTALLBMLT" = "y" ]; then
+471
+    echo "Make note of the following info to set up the BMLT root server:"
+472
+    echo
+473
+    echo "BMLT    echo "Downloading YAP & Preparing files"
+421
+    #Get YAP
+422
+    mkdir /home/"$DOMAINUSER"/public_html/yap
+423
+    #Download latest yap stable
+424
+    curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i - 
+425
+    unzip yap*.zip -d /home/"$DOMAINUSER"/public_html/yap/
+426
+    rm *.zip
+427
+    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
+428
+    echo "Configuring YAP"
+429
+    #Configure yap
+430
+    sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+431
+    sed -i -- 's+$bmlt_root_server = "";+$bmlt_root_server = "'$ROOTSVR'";+g' /home/"$DOMAINUSER"/public_html/yap/config.php
+432
+    sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+433
+    sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+434
+    sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+435
+    sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+436
+    sed -i -- 's/$bmlt_password = "";/$bmlt_password = "'$BMLTPASS'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+437
+    sed -i -- 's/$mysql_hostname = "";/$mysql_hostname = "localhost";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+438
+    sed -i -- 's/$mysql_username = "";/$mysql_username = "'$DOMAINUSER'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+439
+    sed -i -- 's/$mysql_password = "";/$mysql_password = "'$PASSWD'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+440
+    sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+441
+    #edit .htaccess so yap will run under virtualmin
+442
+    echo "Editing .htaccess for yap"
+443
+    sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+444
+fi
+445
+echo
+446
+echo
+447
+echo
+448
+clear
+449
+echo  "Please make a copy of the following information:"
+450
+echo
+451
+echo
+452
+echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
+453
+echo
+454
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
+455
+echo
+456
+if [ "$INSTALLWP" = "y" ]; then
+457
+    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
+458
+fi
+459
+echo
+460
+if [ "$INSTALLYAP" = "y" ]; then
+461
+    echo "Checking Yap configuration and initializing database";
+462
+    echo 
+463
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php;
+464
+    echo
+465
+    echo
+466
+    echo "To access Yap Admin Console go to https://$DOMAIN/yap/admin/";
+467
+fi
+468
+echo
+469
+echo
+470
+if [ "$INSTALLBMLT" = "y" ]; then
+471
+    echo "Make note of the following info to set up the BMLT root server:"
+472
+    echo
+473
+    echo "BMLT    echo "Downloading YAP & Preparing files"
+421
+    #Get YAP
+422
+    mkdir /home/"$DOMAINUSER"/public_html/yap
+423
+    #Download latest yap stable
+424
+    curl -s https://api.github.com/repos/bmlt-enabled/yap/releases/latest | jq -r .assets[] | jq -r .browser_download_url | wget -i - 
+425
+    unzip yap*.zip -d /home/"$DOMAINUSER"/public_html/yap/
+426
+    rm *.zip
+427
+    chown -R "$DOMAINUSER":"$DOMAINUSER" /home/"$DOMAINUSER"/public_html/*
+428
+    echo "Configuring YAP"
+429
+    #Configure yap
+430
+    sed -i -- 's/$title = "";/$title = "'"$TITLE"'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+431
+    sed -i -- 's+$bmlt_root_server = "";+$bmlt_root_server = "'$ROOTSVR'";+g' /home/"$DOMAINUSER"/public_html/yap/config.php
+432
+    sed -i -- 's/$google_maps_api_key = "";/$google_maps_api_key = "'$GMAPAPI'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+433
+    sed -i -- 's/twilio_account_sid = "";/twilio_account_sid = "'$TWILACCTSID'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+434
+    sed -i -- 's/$twilio_auth_token = "";/$twilio_auth_token = "'$TWILAUTHTOK'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+435
+    sed -i -- 's/$bmlt_username = "";/$bmlt_username = "'$BMLTUSR'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+436
+    sed -i -- 's/$bmlt_password = "";/$bmlt_password = "'$BMLTPASS'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+437
+    sed -i -- 's/$mysql_hostname = "";/$mysql_hostname = "localhost";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+438
+    sed -i -- 's/$mysql_username = "";/$mysql_username = "'$DOMAINUSER'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+439
+    sed -i -- 's/$mysql_password = "";/$mysql_password = "'$PASSWD'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+440
+    sed -i -- 's/$mysql_database = "";/$mysql_database = "'$YAPDB'";/g' /home/"$DOMAINUSER"/public_html/yap/config.php
+441
+    #edit .htaccess so yap will run under virtualmin
+442
+    echo "Editing .htaccess for yap"
+443
+    sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
+444
+fi
+445
+echo
+446
+echo
+447
+echo
+448
+clear
+449
+echo  "Please make a copy of the following information:"
+450
+echo
+451
+echo
+452
+echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
+453
+echo
+454
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
+455
+echo
+456
+if [ "$INSTALLWP" = "y" ]; then
+457
+    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
+458
+fi
+459
+echo
+460
+if [ "$INSTALLYAP" = "y" ]; then
+461
+    echo "Checking Yap configuration and initializing database";
+462
+    echo 
+463
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php;
+464
+    echo
+465
+    echo
+466
+    echo "To access Yap Admin Console go to https://$DOMAIN/yap/admin/";
+467
+fi
+468
+echo
+469
+echo
+470
+if [ "$INSTALLBMLT" = "y" ]; then
+471
+    echo "Make note of the following info to set up the BMLT root server:"
+472
+    echo
+473
+    echo "BMLT database: $BMLTDB"
+474
+    echo "BMLT database user: $DOMAINUSER"
+475
+    echo "BMLT database password:  $PASSWD"
+476
+    echo "Google Maps API:  $GMAPAPI"
+477
+    echo
+478
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+479
+fi
+480
+echo
+481
+echo
+482
+echo "A reboot is required"
+483
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
+484
+if [ "$REBOOT" = "y" ]; then
+485
+    halt --reboot
+486
+fi     database: $BMLTDB"
+474
+    echo "BMLT database user: $DOMAINUSER"
+475
+    echo "BMLT database password:  $PASSWD"
+476
+    echo "Google Maps API:  $GMAPAPI"
+477
+    echo
+478
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+479
+fi
+480
+echo
+481
+echo
+482
+echo "A reboot is required"
+483
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
+484
+if [ "$REBOOT" = "y" ]; then
+485
+    halt --reboot
+486
+fi     database: $BMLTDB"
+474
+    echo "BMLT database user: $DOMAINUSER"
+475
+    echo "BMLT database password:  $PASSWD"
+476
+    echo "Google Maps API:  $GMAPAPI"
+477
+    echo
+478
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+479
+fi
+480
+echo
+481
+echo
+482
+echo "A reboot is required"
+483
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
+484
+if [ "$REBOOT" = "y" ]; then
+485
+    halt --reboot
+486
+fi    
 echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
 echo
 echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
