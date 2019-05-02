@@ -31,7 +31,7 @@ You will get a temp password and the fixed ip address emailed to you.
 
 Edit your dns records for vhost.yourdomain (for example) and yourdomain.org, www.yourdomain (You can use something.yourdomain instead of yourdomain if it conflicts with an exisiting site) using the ip address of the droplet.
 
-When dns updates, log in via terminal: ssh root@vhost.yourdomain and change the password
+When dns updates, log in via terminal: ssh root@vhost.yourdomain and change the password then
 power off the server: halt --poweroff
 
 Take a snapshot so you can revert back if you need to without having to redo dns.
