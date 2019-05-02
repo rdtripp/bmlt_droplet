@@ -15,7 +15,7 @@ This project deploys an Ubuntu 18.04.2 droplet on Digital Ocean with Virtualmin 
 4.  YAP
 
 Prerequisites:
-
+bmlt_droplet-universal-alpha
 An account with DigitalOcean https://www.digitalocean.com/
 
 An account with twilio https://www.twilio.com/ , a phone# with them, ACCOUNT SID , & AUTH TOKEN
@@ -42,7 +42,7 @@ Double check that you have correct dns resolution for both the droplet (host) an
 
 Paste in the following command and into the terminal and press enter:
 
-apt-get update && apt-get -y install git jq bind9-host jq curl wget dnsutils net-tools unzip; wget https://github.com/rdtripp/bmlt_droplet/archive/universal-alpha.zip; unzip *.zip; cd bmlt_droplet; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
+apt-get update && apt-get -y install git jq bind9-host jq curl wget dnsutils net-tools unzip; wget https://github.com/rdtripp/bmlt_droplet/archive/universal-alpha.zip; unzip *.zip; cd bmlt_droplet-universal-alpha; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
 
 
 Be prepared to answer the questions it asks:
