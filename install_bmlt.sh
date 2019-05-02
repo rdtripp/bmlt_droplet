@@ -26,7 +26,7 @@ echo "The user for domain $DOMAIN is user $DOMAINUSER"
 
 while :
 do
-        echo "Enter a password for user $DOMAINUSER:   "
+        echo "Enter a password for user $DOMAINUSER :   "
         read PASSWD
            if [[ $PASSWD = "" ]]
                then   
