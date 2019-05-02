@@ -438,4 +438,45 @@ if [ "$INSTALLYAP" = "y" ]; then
     echo "Editing .htaccess for yap"
     sed -i -- 's/Options +FollowSymLinks/Options +SymLinksIfOwnerMatch/g' /home/"$DOMAINUSER"/public_html/yap/.htaccess
 fi
-
+echo
+echo
+echo
+clear
+echo  "Please make a copy of the following information:"
+echo
+echo
+echo "The virtual Server $DOMAIN has user $DOMAINUSER with password $PASSWD"
+echo
+echo "To access virtualmin go to https://$(hostname -f):10000 and log in as root or $ADMINUSER"
+echo
+if [ "$INSTALLWP" = "y" ]; then
+    echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
+fi
+echo
+if [ "$INSTALLYAP" = "y" ]; then
+    echo "Checking Yap configuration and initializing database";
+    echo 
+    curl -k https://$DOMAIN/yap/upgrade-advisor.php;
+    echo
+    echo
+    echo "To access Yap Admin Console go to https://$DOMAIN/yap/admin/";
+fi
+echo
+echo
+if [ "$INSTALLBMLT" = "y" ]; then
+    echo "Make note of the following info to set up the BMLT root server:"
+    echo
+    echo "BMLT database: $BMLTDB"
+    echo "BMLT database user: $DOMAINUSER"
+    echo "BMLT database password:  $PASSWD"
+    echo "Google Maps API:  $GMAPAPI"
+    echo
+    echo " To set up your BMLT Root Server go to https://$DOMAIN/main_server/"
+fi
+echo
+echo
+echo "A reboot is required"
+read -p "Do you want to reboot now? (y or n) n     "    REBOOT
+if [ "$REBOOT" = "y" ]; then
+    halt --reboot
+fi    
