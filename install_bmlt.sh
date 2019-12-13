@@ -82,6 +82,9 @@ do
          fi
 done
 
+apt-get install socat certbot
+certbot register
+
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
