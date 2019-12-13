@@ -82,7 +82,7 @@ do
          fi
 done
 
-apt-get install socat certbot
+apt-get -y install socat certbot
 certbot register
 
 echo "Checking dns records for www.$DOMAIN"
