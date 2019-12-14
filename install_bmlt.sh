@@ -429,8 +429,20 @@ echo
 echo
 
 #set Mariadb root password
-
-mysqladmin --user=root password $PASSWD
+while :
+    do
+         echo "Enter a password for mysql root:"
+         read DBPASSWD
+         if [[ $DBPASSWD = "" ]]
+              then
+                  echo "You have not entered a password."
+                  echo "Please try again."
+                  continue
+              else
+                  break
+         fi
+    done
+mysqladmin --user=root password $DBPASSWD
 
 echo  "Please make a copy of the following information:"
 echo
