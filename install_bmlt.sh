@@ -8,7 +8,7 @@ chmod ugo+rwXt /tmp
 echo "Checking for updates"
 apt-get update
 echo "installing updates"
-apt-get -y dist-upgrade
+DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
