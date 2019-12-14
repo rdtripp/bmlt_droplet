@@ -88,7 +88,7 @@ do
 done
 
 echo "installing virtualmin letsencrypt fix"
-apt-get -y install socat certbot
+apt-get -y install socat certbot apt-get python-certbot-apache
 certbot register
 
 echo "Checking dns records for www.$DOMAIN"
@@ -278,6 +278,11 @@ usermod -aG sudo $DOMAINUSER
 echo
 echo
 echo
+echo installing letsencrypt
+certbot --apache -d $DOMAIN
+certbot --apache -d www.$DOMAIN
+certbot --apache -d mail.$DOMAIN
+
 
 
 echo "Adding additional packages"
