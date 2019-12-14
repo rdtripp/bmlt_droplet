@@ -91,6 +91,9 @@ echo "virtualmin letsencrypt fix"
 apt-get -y install socat certbot python-certbot-apache
 certbot register
 
+echo "change /etc/hostname to preset dns server"
+hostname -f > /etc/hostname
+
 echo "Checking dns records for www.$DOMAIN"
 IPCHECKWWW=$(dig +short www.$DOMAIN);
 echo
@@ -429,8 +432,11 @@ echo
 if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
+
 #set Mariadb root password
+hostname  > /etc/hostname
 mysqladmin -u root password $PASSWD
+
 echo
 if [ "$INSTALLYAP" = "y" ]; then
     echo "Checking Yap configuration and initializing database";
