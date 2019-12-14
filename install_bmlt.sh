@@ -5,9 +5,14 @@ echo "Starting Installation"
 chown root:root /tmp
 chmod ugo+rwXt /tmp
 
+echo "Checking for updates"
+apt-get update
+echo "installing updates"
+apt-get -y dist-upgrade
+
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
-PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"echo "Adding additional packages"
+PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
 
 echo
 echo
@@ -82,6 +87,7 @@ do
          fi
 done
 
+echo "installing virtualmin letsencrypt fix"
 apt-get -y install socat certbot
 certbot register
 
