@@ -427,7 +427,11 @@ fi
 echo
 echo
 echo
-clear
+
+#set Mariadb root password
+
+mysqladmin --user=root password $PASSWD
+
 echo  "Please make a copy of the following information:"
 echo
 echo
@@ -439,9 +443,6 @@ if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
 
-#set Mariadb root password
-
-mysqladmin --user=root password $PASSWD
 
 echo
 if [ "$INSTALLYAP" = "y" ]; then
