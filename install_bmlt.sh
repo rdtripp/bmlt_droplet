@@ -283,7 +283,8 @@ echo
 echo
 
 #letsencrypt fix
-wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py | yes | cp -rf acme_tiny.py /usr/share/webmin/acme_tiny.py
+wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py 
+yes | cp -rf acme_tiny.py /usr/share/webmin/acme_tiny.py
 
 if [ "$INSTALLLE" = "y" ]; then
 echo "installing certificate from Letsencrypt"
