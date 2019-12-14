@@ -327,6 +327,14 @@ if [ "$INSTALLWP" = "y" ]; then
     sudo mv wp-cli.phar /usr/local/bin/wp
     #End Wordpress CLI install
     
+ #Install & activate themify basic theme
+su - $DOMAINUSER
+cd ~/public_html/wp-content/themes
+curl https://themify.me/download/5/ --output basic.zip
+unzip basic.zip
+wp theme activate basic
+exit
+    
     echo "Editing php.ini to accomidate uploads to WordPress"
     #Edit php.ini
     sed -i -- 's/upload_max_filesize = 2M/upload_max_filesize = 720M/g' /home/"$DOMAINUSER"/etc/php.ini
