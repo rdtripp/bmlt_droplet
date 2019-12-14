@@ -442,7 +442,7 @@ while :
                   break
          fi
     done
-mysqladmin --user=root password $DBPASSWD
+virtualmin set-mysql-pass --user root --pass $DBPASSWD
 
 echo  "Please make a copy of the following information:"
 echo
