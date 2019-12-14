@@ -139,14 +139,6 @@ select yn in "Minimal" "Full"; do
     esac
 done
 
-echo "Install certificate from Letsencrypt? select 1 or 2"
-select yn in "Yes" "No"; do
-    case $yn in
-        Yes ) INSTALLLE=y;break;;
-        No ) break;;
-        *) echo "you have made an invalid entry, please select option 1 or 2";;
-    esac 
-done  
   
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
@@ -282,25 +274,6 @@ echo
 echo
 echo
 
-#letsencrypt fix
-wget https://raw.githubusercontent.com/diafygi/acme-tiny/master/acme_tiny.py 
-yes | cp -rfv acme_tiny.py /usr/share/webmin/acme_tiny.py
-
-if [ "$INSTALLLE" = "y" ]; then
-echo "installing certificate from Letsencrypt"
-    if [ "$WWW" = "1" ] && [ "$MAIL" = "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2 --host mail.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" = "1" ] && [ "$MAIL" != "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host www.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" != "1" ] && [ "$MAIL" = "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2  --host mail.$DOMAIN --renew 2
-        fi
-    if [ "$WWW" != "1" ] && [ "$MAIL" != "1" ]; then
-        /usr/share/webmin/virtual-server/generate-letsencrypt-cert.pl --domain $DOMAIN --validate-first --host $DOMAIN --renew 2
-        fi
-fi
 
 echo "Adding additional packages"
 apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc
