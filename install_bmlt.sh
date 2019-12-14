@@ -434,8 +434,8 @@ if [ "$INSTALLWP" = "y" ]; then
 fi
 
 #set Mariadb root password
-hostname  > /etc/hostname
-mysqladmin -u root password $PASSWD
+
+mysqladmin --user=root password $PASSWD
 
 echo
 if [ "$INSTALLYAP" = "y" ]; then
