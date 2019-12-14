@@ -88,7 +88,7 @@ do
 done
 
 echo "virtualmin letsencrypt fix"
-apt-get -y install socat certbot python-certbot-apache
+
 certbot register
 
 echo "change /etc/hostname to preset dns server"
