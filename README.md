@@ -56,6 +56,12 @@ Enter password for Virtual Server user:
 ………………………………………………………………………………………………………………………..
 ………………………………………………………………………………………………………………………….
 
+Enter email address (used for urgent renewal and security notices) (Enter 'c' to
+cancel):
+
+………………………………………………………………………………………………………………………..
+………………………………………………………………………………………………………………………….
+
 Configuring tzdata
 
 select country and press enter
