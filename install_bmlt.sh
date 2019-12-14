@@ -282,10 +282,16 @@ echo
 echo
 echo
 echo installing letsencrypt
-certbot --apache -d $DOMAIN
-certbot --apache -d www.$DOMAIN
-certbot --apache -d mail.$DOMAIN
 
+certbot --apache -d $DOMAIN
+
+if [ "$WWW" = "1" ]; then
+certbot --apache -d www.$DOMAIN
+fi
+
+if [ "$MAIL" = "1" ]; then
+certbot --apache -d mail.$DOMAIN
+fi
 
 
 echo "Adding additional packages"
