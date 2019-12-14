@@ -328,12 +328,11 @@ if [ "$INSTALLWP" = "y" ]; then
     #End Wordpress CLI install
     
  #Install & activate themify basic theme
-su - $DOMAINUSER
-cd ~/public_html/wp-content/themes
-curl https://themify.me/download/5/ --output basic.zip
-unzip basic.zip
-wp theme activate basic
-exit
+ cd /home/$DOMAINUSER/public_html/wp-content/themes
+ curl https://themify.me/download/5/ --output basic.zip
+ unzip basic.zip
+ chown -R $DOMAINUSER|$DOMAINUSER basic
+ sudo -u $DOMAINUSER -i wp theme activate basic
     
     echo "Editing php.ini to accomidate uploads to WordPress"
     #Edit php.ini
