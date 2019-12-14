@@ -87,8 +87,8 @@ do
          fi
 done
 
-echo "installing virtualmin letsencrypt fix"
-apt-get -y install socat certbot apt-get python-certbot-apache
+echo "virtualmin letsencrypt fix"
+apt-get -y install socat certbot python-certbot-apache
 certbot register
 
 echo "Checking dns records for www.$DOMAIN"
