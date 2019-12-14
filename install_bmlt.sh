@@ -144,8 +144,7 @@ select yn in "Minimal" "Full"; do
         *) echo "Error select option 1 or 2";;
     esac
 done
-
-  
+ 
   #WordPress Install
  echo "Do you want to install WordPress? select 1 or 2"
 select yn in "Yes" "No"; do
@@ -425,6 +424,8 @@ echo
 if [ "$INSTALLWP" = "y" ]; then
     echo " To access WordPress Admin go to https://$DOMAIN/wp-admin/ and log in using user $WPADMIN and password $WPADMINPASS"
 fi
+#set Mariadb root password
+mysqladmin -u root password $PASSWD
 echo
 if [ "$INSTALLYAP" = "y" ]; then
     echo "Checking Yap configuration and initializing database";
