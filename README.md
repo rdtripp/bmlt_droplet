@@ -1,5 +1,7 @@
 bmlt_droplet
 
+Notes:  FQDN is Fully Qualified Domain Name such as example.org .
+
 Description:
 
 This project deploys an Ubuntu 18.04.2 droplet on Digital Ocean with Virtualmin and the following options:
@@ -22,14 +24,14 @@ An account with twilio https://www.twilio.com/ , a phone# with them, ACCOUNT SID
 
 Google maps api key, instructions at https://bmlt.app/google-maps-api-keys-and-geolocation-issues/
 
-A domain that you can create dns A records. You will need at mimimum a dns record for the droplet such as vhost.yourdomain and a dns record for the virtual server such as yourdomain or something.yourdomain. www.yourdomain for the virtual server is also recommended. If you do the full virtualmin install mail.yourdomain for the virtual server is also recommended.
+A domain that you can create dns A records. You will need at mimimum a dns record for the droplet such as something.FQDN and a dns record for the virtual server such as FQDN or something_else.FQDN . www.FQDN or www.something_else.FQDN for the virtual server is also recommended. If you do the full virtualmin install mail.FQDN for the virtual server is also recommended.
 
 Install Procedure:
 
-Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one, you can upgrade later as needed) named (for example) vhost.yourdomain
+Create a Ubuntu 18.04.2 Droplet (the $5.00/mo one, you can upgrade later as needed) named (for example) something.FQDN .
 You will get a temp password and the fixed ip address emailed to you.
 
-Edit your dns records for vhost.yourdomain (for example) and yourdomain.org, www.yourdomain (You can use something.yourdomain instead of yourdomain if it conflicts with an exisiting site) using the ip address of the droplet.
+Edit your dns records for the droplet something.FQDN , the virtual server FQDN , & www.FQDN (You can use something_else.FQDN  and www.something_else.FQDN instead of FQDN & www.FQDN respectively if it conflicts with an exisiting site) using the ip address of the droplet.
 
 When dns updates, log in via terminal: ssh root@vhost.yourdomain and change the password then
 power off the server: halt --poweroff
@@ -75,21 +77,8 @@ Install Virtualmin Minimal or Full? select 1 or 2
 
 2) Full
 
-#? 
-
 ………………………………………………………………………………………………………………………..
-………………………………………………………………………………………………………………………….
-
-Install certificate from Letsencrypt? select 1 or 2 
-
-1) Yes 
-
-2) No 
-
-#? 
-
-………………………………………………………………………………………………………………………..
-…………………………………………………………………………………………………………………………
+……………………………………………………………………………………………………………………..
 
 Install WordPress? select 1 or 2 
 
