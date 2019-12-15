@@ -44,7 +44,7 @@ Double check that you have correct dns resolution for both the droplet (host) an
 
 Paste in the following command and into the terminal and press enter:
 
-apt-get update && apt-get -y install git jq bind9-host jq curl wget dnsutils net-tools socat certbot python-certbot-apache; git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
+git clone https://github.com/rdtripp/bmlt_droplet.git; cd bmlt_droplet; chmod +x ./install_bmlt.sh; ./install_bmlt.sh
 
 
 Be prepared to answer the questions it asks:
