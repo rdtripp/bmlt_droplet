@@ -344,7 +344,7 @@ fi
  cd /home/$DOMAINUSER/public_html/wp-content/themes
  curl https://themify.me/download/5/ --output basic.zip
  unzip basic.zip
- chown -R $DOMAINUSER|$DOMAINUSER basic
+ chown -R $DOMAINUSER:$DOMAINUSER basic
  #sudo -u $DOMAINUSER -i wp theme activate basic
 echo
 echo
