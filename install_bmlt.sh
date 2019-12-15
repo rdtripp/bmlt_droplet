@@ -10,6 +10,9 @@ apt-get update
 echo "installing updates"
 DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 
+#Installing required packages
+apt-get apt-get -y install git jq bind9-host jq curl wget dnsutils net-tools socat certbot python-certbot-apache
+
 #Get public ip address of droplet
 echo "Getting public ip address of droplet"
 PUBIP=$(curl ipinfo.io/ip); echo "The public IP address is $PUBIP"
