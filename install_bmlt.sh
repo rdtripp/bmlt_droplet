@@ -332,7 +332,7 @@ if [ "$INSTALLWP" = "y" ]; then
  curl https://themify.me/download/5/ --output basic.zip
  unzip basic.zip
  chown -R $DOMAINUSER|$DOMAINUSER basic
- sudo -u $DOMAINUSER -i wp theme activate basic
+ #sudo -u $DOMAINUSER -i wp theme activate basic
     
     echo "Editing php.ini to accomidate uploads to WordPress"
     #Edit php.ini
