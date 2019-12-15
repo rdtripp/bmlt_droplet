@@ -329,13 +329,7 @@ if [ "$INSTALLWP" = "y" ]; then
     chmod +x wp-cli.phar
     sudo mv wp-cli.phar /usr/local/bin/wp
     #End Wordpress CLI install
-    
- #Install & activate themify basic theme
- cd /home/$DOMAINUSER/public_html/wp-content/themes
- curl https://themify.me/download/5/ --output basic.zip
- unzip basic.zip
- chown -R $DOMAINUSER|$DOMAINUSER basic
- #sudo -u $DOMAINUSER -i wp theme activate basic
+
     
     echo "Editing php.ini to accomidate uploads to WordPress"
     #Edit php.ini
@@ -344,6 +338,14 @@ if [ "$INSTALLWP" = "y" ]; then
     sed -i -- 's/memory_limit = 128M/memory_limit = 1024M/g' /home/"$DOMAINUSER"/etc/php.ini
     sed -i -- 's/max_execution_time = 40/max_execution_time = 180/g' /home/"$DOMAINUSER"/etc/php.ini
 fi
+
+    
+ #Install & activate themify basic theme
+ cd /home/$DOMAINUSER/public_html/wp-content/themes
+ curl https://themify.me/download/5/ --output basic.zip
+ unzip basic.zip
+ chown -R $DOMAINUSER|$DOMAINUSER basic
+ #sudo -u $DOMAINUSER -i wp theme activate basic
 echo
 echo
 echo
